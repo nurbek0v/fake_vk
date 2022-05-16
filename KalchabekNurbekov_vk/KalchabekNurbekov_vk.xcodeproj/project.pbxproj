@@ -14,6 +14,8 @@
 		074FD2C727F85B1E00B8C396 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 074FD2C527F85B1E00B8C396 /* Main.storyboard */; };
 		074FD2C927F85B2000B8C396 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 074FD2C827F85B2000B8C396 /* Assets.xcassets */; };
 		074FD2CC27F85B2000B8C396 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 074FD2CA27F85B2000B8C396 /* LaunchScreen.storyboard */; };
+		076C3766281A2E0700EFF6B1 /* avatarUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076C3765281A2E0700EFF6B1 /* avatarUIView.swift */; };
+		076C3768281A371000EFF6B1 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076C3767281A371000EFF6B1 /* LikeControl.swift */; };
 		07ED13C2280DBC3600BA784C /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED13C1280DBC3600BA784C /* FriendModel.swift */; };
 		07ED13C5280DC1B300BA784C /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED13C4280DC1B300BA784C /* FriendTableViewCell.swift */; };
 		07ED13C7280E3AAE00BA784C /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED13C6280E3AAE00BA784C /* GroupTableViewCell.swift */; };
@@ -37,6 +39,8 @@
 		074FD2C827F85B2000B8C396 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		074FD2CB27F85B2000B8C396 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		074FD2CD27F85B2000B8C396 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		076C3765281A2E0700EFF6B1 /* avatarUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = avatarUIView.swift; sourceTree = "<group>"; };
+		076C3767281A371000EFF6B1 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		07ED13C1280DBC3600BA784C /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
 		07ED13C4280DC1B300BA784C /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		07ED13C6280E3AAE00BA784C /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
@@ -75,15 +79,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		0700D91C280C619F00BC3B97 /* Interface Builder */ = {
-			isa = PBXGroup;
-			children = (
-				074FD2C527F85B1E00B8C396 /* Main.storyboard */,
-				074FD2CA27F85B2000B8C396 /* LaunchScreen.storyboard */,
-			);
-			path = "Interface Builder";
-			sourceTree = "<group>";
-		};
 		074FD2B327F85B1E00B8C396 = {
 			isa = PBXGroup;
 			children = (
@@ -107,7 +102,10 @@
 				0700D91B280C617900BC3B97 /* Controllers */,
 				07ED13C3280DBC3D00BA784C /* Model */,
 				07D173D5280F173B000CC726 /* Cells */,
-				0700D91C280C619F00BC3B97 /* Interface Builder */,
+				076C3765281A2E0700EFF6B1 /* avatarUIView.swift */,
+				076C3767281A371000EFF6B1 /* LikeControl.swift */,
+				074FD2C527F85B1E00B8C396 /* Main.storyboard */,
+				074FD2CA27F85B2000B8C396 /* LaunchScreen.storyboard */,
 				074FD2C827F85B2000B8C396 /* Assets.xcassets */,
 				074FD2CD27F85B2000B8C396 /* Info.plist */,
 			);
@@ -219,10 +217,12 @@
 				074FD2C027F85B1E00B8C396 /* AppDelegate.swift in Sources */,
 				07ED13C7280E3AAE00BA784C /* GroupTableViewCell.swift in Sources */,
 				07FBF795280767A10008E85B /* FriendsGroupViewController.swift in Sources */,
+				076C3766281A2E0700EFF6B1 /* avatarUIView.swift in Sources */,
 				07ED13CB280E53B600BA784C /* AvailableGroupTableViewCell.swift in Sources */,
 				07ED13C5280DC1B300BA784C /* FriendTableViewCell.swift in Sources */,
 				07FBF799280767D50008E85B /* FriendsPhotoViewController.swift in Sources */,
 				07ED13C2280DBC3600BA784C /* FriendModel.swift in Sources */,
+				076C3768281A371000EFF6B1 /* LikeControl.swift in Sources */,
 				07FBF791280767360008E85B /* MainMenuViewController.swift in Sources */,
 				07ED13C9280E3B1900BA784C /* GroupModel.swift in Sources */,
 				07FBF793280767680008E85B /* FriendsListViewController.swift in Sources */,

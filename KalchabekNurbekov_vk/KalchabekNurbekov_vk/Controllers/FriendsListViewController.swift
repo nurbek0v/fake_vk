@@ -11,9 +11,9 @@ class FriendsListViewController: UITableViewController {
 
     
     var friends = [
-        Friend(name: "Oscar Isaac", age: "43 года", avatar: UIImage(named: "OscarIsaac"), photo: [UIImage(named: "OscarIsaac"),UIImage(named: "OscarIsaac2"),UIImage(named: "OscarIsaac3")]),
-        Friend(name: "Elon Mask", age: "50 года", avatar: UIImage(named: "ElonMask"), photo: [UIImage(named: "ElonMask"),UIImage(named: "ElonMask2"),UIImage(named: "ElonMask3")]),
-        Friend(name: "Zendaya Maree", age: "25 года", avatar: UIImage(named: "ZendayaMaree"), photo: [UIImage(named: "ZendayaMaree"),UIImage(named: "ZendayaMaree2"),UIImage(named: "ZendayaMaree3")]),
+        Friend(name: "Oscar Isaac", age: "43 года", avatar: UIImage(named: "OscarIsaac"), photos: [UIImage(named: "OscarIsaac"),UIImage(named: "OscarIsaac2"),UIImage(named: "OscarIsaac3")]),
+        Friend(name: "Elon Mask", age: "50 года", avatar: UIImage(named: "ElonMask"), photos: [UIImage(named: "ElonMask"),UIImage(named: "ElonMask2"),UIImage(named: "ElonMask3")]),
+        Friend(name: "Zendaya Maree", age: "25 года", avatar: UIImage(named: "ZendayaMaree"), photos: [UIImage(named: "ZendayaMaree"),UIImage(named: "ZendayaMaree2"),UIImage(named: "ZendayaMaree3")]),
         ]
     
     override func viewDidLoad() {
@@ -68,8 +68,8 @@ class FriendsListViewController: UITableViewController {
         guard segue.identifier == "GoDetail" else { return }
         let destination = segue.destination as! FriendsPhotoViewController
         let indexPath = tableView.indexPathForSelectedRow!
-            destination.photoArray = friends[indexPath.row].photo
-            print(friends[indexPath.row].photo)
+            destination.photoArray = friends[indexPath.row].photos
+            print(friends[indexPath.row].photos)
         
         
     }
