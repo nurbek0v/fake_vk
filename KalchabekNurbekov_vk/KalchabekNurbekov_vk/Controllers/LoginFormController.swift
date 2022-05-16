@@ -7,12 +7,14 @@
 
 import UIKit
 import Foundation
+@IBDesignable
 
 class LoginFormController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBAction func enterButton(_ sender: Any) {
+        
         print("Пользователь нажал на кнопку входа")
     }
     @IBOutlet weak var loginInput: UITextField!
