@@ -347,7 +347,7 @@
                                     <outlet property="friendsAge" destination="xqh-dp-iIO" id="CjZ-zT-SdG"/>
                                     <outlet property="friendsName" destination="dLV-BA-mlR" id="rhd-Ei-vyK"/>
                                     <outlet property="friendsPhoto" destination="uGl-Pe-xf5" id="bMo-fi-iMW"/>
-                                    <segue destination="HWr-TK-uFK" kind="presentation" identifier="GoDetail" trigger="accessoryAction" modalPresentationStyle="fullScreen" id="bgP-jE-ZSK"/>
+                                    <segue destination="HWr-TK-uFK" kind="show" id="62W-VS-pPh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
