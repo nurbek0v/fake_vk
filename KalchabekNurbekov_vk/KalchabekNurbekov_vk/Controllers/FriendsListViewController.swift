@@ -4,7 +4,7 @@
 //
 //  Created by Kalchabek Nurbekov on 13.04.2022.
 //
-
+import SwiftUI
 import UIKit
 
 class FriendsListViewController: UITableViewController {
@@ -23,31 +23,57 @@ class FriendsListViewController: UITableViewController {
         Friend(name: "Mark Zuckerberg", age: "35 года", avatar: UIImage(named: "Mark_Zuckerberg"), photos: [UIImage(named: "Mark_Zuckerberg"),UIImage(named: "Mark_Zuckerberg"),UIImage(named: "Mark_Zuckerberg")]),
         
         ]
+    var sortedFriends = [Character: [Friend]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UINib(nibName: "FriendXibTableViewCell", bundle: nil), forCellReuseIdentifier: "FriendXibTableViewCell")
+        self.sortedFriends = sort(friends: friends)
 
 
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.navigationItem.leftBarButtonItem?.title = "Unfollow"
         
     }
+    private func sort(friends: [Friend]) -> [Character: [Friend]] {
+        var friendDict = [Character: [Friend]] ()
+        friends.forEach() { friend in
+            guard let firstChar = friend.name.first else { return }
+            if var thisCharFriend = friendDict[firstChar] {
+                thisCharFriend.append(friend)
+                friendDict[firstChar] = thisCharFriend
+            } else {
+                friendDict[firstChar] = [friend]
+            }
+            
+        }
+        return friendDict
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sortedFriends.keys.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return friends.count
+        let keysSorted = sortedFriends.keys.sorted()
+        let friends = sortedFriends[keysSorted[section]]?.count ?? 0
+        return friends
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
-        let friend = friends[indexPath.row]
-        cell.set(friend: friend)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendXibTableViewCell", for: indexPath) as! FriendXibTableViewCell
+        
+        let firstChar = sortedFriends.keys.sorted()[indexPath.section]
+        let friends = sortedFriends[firstChar]!
+        let friend: Friend = friends[indexPath.row]
+        cell.friendImageView.image = friend.avatar
+        cell.friendNameLabel.text = friend.name
+        cell.friendAgeLabel.text = friend.age
+        
+        
 
 
         return cell
@@ -80,6 +106,9 @@ class FriendsListViewController: UITableViewController {
             
         
         
+    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        String(sortedFriends.keys.sorted()[section])
     }
    
 
