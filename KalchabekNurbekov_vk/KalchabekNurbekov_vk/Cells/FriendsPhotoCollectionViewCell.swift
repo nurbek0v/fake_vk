@@ -24,7 +24,7 @@ class FriendsPhotoCollectionViewCell: UICollectionViewCell {
         likeControl.isLike.toggle()
         
         if likeControl.isLike {
-            likeControl.likePicture.image = UIImage(named: "suit.heart.fill")
+            likeControl.likePicture.image = UIImage(systemName: "suit.heart.fill")
         } else {
             likeControl.likePicture.image = nil
         }

@@ -10,14 +10,14 @@ import UIKit
 class avatarUIView: UIView {
     @IBOutlet var avatarImageView: UIImageView!
     @IBOutlet var shadowView: UIView!
-    var shadowColor = UIColor.blue
+    var shadowColor = UIColor.black
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         shadowView.layer.shadowColor = shadowColor.cgColor
         shadowView.layer.shadowOffset = .zero
-        shadowView.layer.shadowRadius = 7
+        shadowView.layer.shadowRadius = 10
         shadowView.layer.shadowOpacity = 0.8
     }
     override func layoutSubviews() {

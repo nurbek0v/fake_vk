@@ -69,7 +69,7 @@ class FriendsListViewController: UITableViewController {
         let destination = segue.destination as! FriendsPhotoViewController
         let indexPath = tableView.indexPathForSelectedRow!
             destination.photoArray = friends[indexPath.row].photos
-            print(friends[indexPath.row].photos)
+            
         
         
     }
