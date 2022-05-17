@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class FriendsGroupViewController: UITableViewController {
     @IBOutlet var searchBarMyGroup: UISearchBar! {
@@ -14,7 +15,7 @@ class FriendsGroupViewController: UITableViewController {
         }
     }
     
-    var groups = [
+    var MyGroups = [
         Group(name: "В Контакте", city: "Москва", image: .init(named: "vkPhoto")!),
         Group(name: "ios developing", city: "Нью-Йорк", image: .init(named: "iosPhoto")!),
         Group(name: "English for IT", city: "London", image: .init(named: "englishPhoto")!),
@@ -31,32 +32,57 @@ class FriendsGroupViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        filteredGroups = groups
-       // self.sortedFriends = sort(friends: MyFriends)
+        
+        tableView.register(UINib(nibName: "FriendXibTableViewCell", bundle: nil), forCellReuseIdentifier: "FriendXibTableViewCell")
+       
+      self.sortedGroups = sort(group: MyGroups)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
          self.navigationItem.leftBarButtonItem = self.editButtonItem
+        self.navigationItem.leftBarButtonItem?.title = "Unfollow"
+    }
+    private func sort(group: [Group]) -> [Character: [Group]] {
+        var groupDict = [Character: [Group]] ()
+        MyGroups.forEach() { group in
+            guard let firstChar = group.name.first else { return }
+            if var thisCharGroup = groupDict[firstChar] {
+                thisCharGroup.append(group)
+                groupDict[firstChar] = thisCharGroup
+            } else {
+                groupDict[firstChar] = [group]
+            }
+            
+        }
+        return groupDict
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return sortedGroups.keys.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return filteredGroups.count
+        
+        let keysSorted = sortedGroups.keys.sorted()
+        let groups = sortedGroups[keysSorted[section]]?.count ?? 0
+        return groups
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupTableViewCell
-        let group = filteredGroups[indexPath.row]
-        cell.set(group: group)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendXibTableViewCell", for: indexPath) as! FriendXibTableViewCell
+
+        let firstChar = sortedGroups.keys.sorted()[indexPath.section]
+        let groups = sortedGroups[firstChar]!
+        let group: Group = groups[indexPath.row]
+        cell.friendImageView.image = group.image
+        cell.friendNameLabel.text = group.name
+        cell.friendAgeLabel.text = group.city
 
         return cell
     }
@@ -68,9 +94,30 @@ class FriendsGroupViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            filteredGroups.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            let firstChar = sortedGroups.keys.sorted()[indexPath.section]
+            let groups = sortedGroups[firstChar]!
+            let group: Group = groups[indexPath.row]
+            let initialSectionCount = sortedGroups.keys.count
+            
+            MyGroups.removeAll() {$0.name == group.name}
+            
+            if (searchBarMyGroup.text ?? "").isEmpty {
+                filteredGroups = MyGroups
+            } else {
+                filteredGroups = MyGroups.filter {$0.name.lowercased().contains(searchBarMyGroup.text!.lowercased())}
+            }
+            sortedGroups = sort(group: filteredGroups)
+            if initialSectionCount - sortedGroups.keys.count == 0 {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            } else {
+                tableView.deleteSections(IndexSet([indexPath.section]), with: .automatic)
+            }
+           
         }
+    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        String(sortedGroups.keys.sorted()[section].uppercased())
     }
 
 
@@ -103,11 +150,12 @@ class FriendsGroupViewController: UITableViewController {
 extension FriendsGroupViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText .isEmpty {
-            filteredGroups = groups
+            filteredGroups = MyGroups
         } else {
-            filteredGroups = groups.filter {$0.name.lowercased().contains(searchText.lowercased())}
+            filteredGroups = MyGroups.filter {$0.name.lowercased().contains(searchText.lowercased())}
             
         }
+        sortedGroups = sort(group: filteredGroups)
         tableView.reloadData()
     }
     
