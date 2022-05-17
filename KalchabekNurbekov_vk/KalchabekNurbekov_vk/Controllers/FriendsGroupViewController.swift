@@ -8,16 +8,31 @@
 import UIKit
 
 class FriendsGroupViewController: UITableViewController {
+    @IBOutlet var searchBarMyGroup: UISearchBar! {
+        didSet {
+            searchBarMyGroup.delegate = self
+        }
+    }
     
     var groups = [
+        Group(name: "В Контакте", city: "Москва", image: .init(named: "vkPhoto")!),
+        Group(name: "ios developing", city: "Нью-Йорк", image: .init(named: "iosPhoto")!),
+        Group(name: "English for IT", city: "London", image: .init(named: "englishPhoto")!),
+        Group(name: "В Контакте", city: "Москва", image: .init(named: "vkPhoto")!),
+        Group(name: "ios developing", city: "Нью-Йорк", image: .init(named: "iosPhoto")!),
+        Group(name: "English for IT", city: "London", image: .init(named: "englishPhoto")!),
         Group(name: "В Контакте", city: "Москва", image: .init(named: "vkPhoto")!),
         Group(name: "ios developing", city: "Нью-Йорк", image: .init(named: "iosPhoto")!),
         Group(name: "English for IT", city: "London", image: .init(named: "englishPhoto")!)
         ]
     
+    var filteredGroups = [Group]()
+    var sortedGroups = [Character: [Group]]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        filteredGroups = groups
+       // self.sortedFriends = sort(friends: MyFriends)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,13 +49,13 @@ class FriendsGroupViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return groups.count
+        return filteredGroups.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupTableViewCell
-        let group = groups[indexPath.row]
+        let group = filteredGroups[indexPath.row]
         cell.set(group: group)
 
         return cell
@@ -53,7 +68,7 @@ class FriendsGroupViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            groups.remove(at: indexPath.row)
+            filteredGroups.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -84,4 +99,16 @@ class FriendsGroupViewController: UITableViewController {
     }
     */
 
+}
+extension FriendsGroupViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText .isEmpty {
+            filteredGroups = groups
+        } else {
+            filteredGroups = groups.filter {$0.name.lowercased().contains(searchText.lowercased())}
+            
+        }
+        tableView.reloadData()
+    }
+    
 }

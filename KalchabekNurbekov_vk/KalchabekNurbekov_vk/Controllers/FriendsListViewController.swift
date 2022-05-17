@@ -4,13 +4,18 @@
 //
 //  Created by Kalchabek Nurbekov on 13.04.2022.
 //
-import SwiftUI
 import UIKit
+import Foundation
 
 class FriendsListViewController: UITableViewController {
+    @IBOutlet var searchBarFriends: UISearchBar! {
+        didSet {
+            searchBarFriends.delegate = self
+        }
+    }
 
     
-    var friends = [
+    var MyFriends = [
         Friend(name: "Oscar Isaac", age: "43 года", avatar: UIImage(named: "OscarIsaac"), photos: [UIImage(named: "OscarIsaac"),UIImage(named: "OscarIsaac2"),UIImage(named: "OscarIsaac3")]),
         Friend(name: "Elon Mask", age: "50 года", avatar: UIImage(named: "ElonMask"), photos: [UIImage(named: "ElonMask"),UIImage(named: "ElonMask2"),UIImage(named: "ElonMask3")]),
         Friend(name: "Zendaya Maree", age: "25 года", avatar: UIImage(named: "ZendayaMaree"), photos: [UIImage(named: "ZendayaMaree"),UIImage(named: "ZendayaMaree2"),UIImage(named: "ZendayaMaree3")]),
@@ -23,12 +28,14 @@ class FriendsListViewController: UITableViewController {
         Friend(name: "Mark Zuckerberg", age: "35 года", avatar: UIImage(named: "Mark_Zuckerberg"), photos: [UIImage(named: "Mark_Zuckerberg"),UIImage(named: "Mark_Zuckerberg"),UIImage(named: "Mark_Zuckerberg")]),
         
         ]
+    var filteredFriends = [Friend]()
     var sortedFriends = [Character: [Friend]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(UINib(nibName: "FriendXibTableViewCell", bundle: nil), forCellReuseIdentifier: "FriendXibTableViewCell")
-        self.sortedFriends = sort(friends: friends)
+        self.sortedFriends = sort(friends: MyFriends)
 
 
         self.navigationItem.leftBarButtonItem = self.editButtonItem
@@ -89,8 +96,27 @@ class FriendsListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            friends.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            let firstChar = sortedFriends.keys.sorted()[indexPath.section]
+            let friends = sortedFriends[firstChar]!
+            let friend = friends[indexPath.row]
+            let initialSectionsCount = sortedFriends.keys.count
+            
+            MyFriends.removeAll() {$0.name == friend.name}
+            
+            if (searchBarFriends.text ?? "").isEmpty {
+                filteredFriends = MyFriends
+            } else {
+                filteredFriends = MyFriends.filter { $0.name.lowercased().contains(searchBarFriends.text!.lowercased()) }
+            }
+            sortedFriends = sort(friends: filteredFriends)
+            if initialSectionsCount - sortedFriends.keys.count == 0 {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            } else {
+                tableView.deleteSections(IndexSet([indexPath.section]), with: .automatic)
+            }
+            
+            
         }
     }
 
@@ -102,7 +128,7 @@ class FriendsListViewController: UITableViewController {
         guard segue.identifier == "GoDetail" else { return }
         let destination = segue.destination as! FriendsPhotoViewController
         let indexPath = tableView.indexPathForSelectedRow!
-            destination.photoArray = friends[indexPath.row].photos
+            destination.photoArray = MyFriends[indexPath.row].photos
             
         
         
@@ -112,4 +138,15 @@ class FriendsListViewController: UITableViewController {
     }
    
 
+}
+extension FriendsListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText .isEmpty {
+            filteredFriends = MyFriends
+        } else {
+            filteredFriends = MyFriends.filter {$0.name.lowercased().contains(searchText.lowercased())}
+        }
+        sortedFriends = sort(friends: filteredFriends)
+        tableView.reloadData()
+    }
 }
