@@ -21,10 +21,10 @@ class FriendsGroupViewController: UITableViewController {
         Group(name: "English for IT", city: "London", image: .init(named: "englishPhoto")!),
         Group(name: "В Контакте", city: "Москва", image: .init(named: "vkPhoto")!),
         Group(name: "ios developing", city: "Нью-Йорк", image: .init(named: "iosPhoto")!),
-        Group(name: "English for IT", city: "London", image: .init(named: "englishPhoto")!),
+        Group(name: "English for IT2", city: "London", image: .init(named: "englishPhoto")!),
         Group(name: "В Контакте", city: "Москва", image: .init(named: "vkPhoto")!),
         Group(name: "ios developing", city: "Нью-Йорк", image: .init(named: "iosPhoto")!),
-        Group(name: "English for IT", city: "London", image: .init(named: "englishPhoto")!)
+        Group(name: "English for IT3", city: "London", image: .init(named: "englishPhoto")!)
         ]
     
     var filteredGroups = [Group]()

@@ -10,7 +10,7 @@ import UIKit
 
 class FriendsPhotoViewController: UICollectionViewController {
     
-    var photoArray: [ UIImage? ] = []
+    var photoArray: [UIImage?] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

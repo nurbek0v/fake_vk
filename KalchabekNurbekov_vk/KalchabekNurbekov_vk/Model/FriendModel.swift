@@ -12,5 +12,5 @@ struct Friend {
     var name: String
     var age: String
     var avatar: UIImage?
-    var photos: [UIImage?]
+    var photos: [UIImage] = []
 }
