@@ -13,16 +13,42 @@ class LoginFormController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var loadingStack: UIStackView!
+    @IBOutlet weak var pointOne: UIView!
+    @IBOutlet weak var pointTwo: UIView!
+    @IBOutlet weak var pointThree: UIView!
     @IBAction func enterButton(_ sender: Any) {
-        
-        print("Пользователь нажал на кнопку входа")
+        loadingStack.isHidden = false
+        loginInput.isHidden = true
+        passwordInput.isHidden = true
+        UIView.animateKeyframes(withDuration: 0.7,
+                                delay: 0,
+                                options: .repeat,
+                                animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
+                self.pointOne.alpha = 0.0
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.33, relativeDuration: 0.66, animations: {
+                self.pointTwo.alpha = 0.0
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.66, relativeDuration: 1, animations: {
+                self.pointThree.alpha = 0.0
+            })
+
+
+        },
+                                completion: nil)
     }
     @IBOutlet weak var loginInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        pointOne.layer.cornerRadius = pointOne.bounds.height/2
+        pointTwo.layer.cornerRadius = pointTwo.bounds.height/2
+        pointThree.layer.cornerRadius = pointThree.bounds.height/2
+       
+        loadingStack.isHidden = true
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(hideScreen))
         view.addGestureRecognizer(tapGR)
     }
@@ -68,7 +94,13 @@ class LoginFormController: UIViewController {
         let alter = UIAlertController(title: "Ошибка", message: "Введены не верные данные пользователя", preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alter.addAction(action)
-        present(alter, animated: true, completion: nil) }
+        present(alter, animated: true, completion: {
+            self.loadingStack.isHidden = true
+            self.loginInput.isHidden = false
+            self.passwordInput.isHidden = false
+            self.loginInput.text = ""
+            self.passwordInput.text = ""
+        }) }
     
 }
 
