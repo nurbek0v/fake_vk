@@ -465,13 +465,38 @@
                                                 <outlet property="likePicture" destination="FhD-bm-Msh" id="w6d-Eg-p5a"/>
                                             </connections>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jlb-9f-ZXD">
+                                            <rect key="frame" x="244" y="338" width="60" height="30"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EoN-Nu-bqK">
+                                                    <rect key="frame" x="2.5" y="2.5" width="55" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="T3u-8y-zTO"/>
+                                                        <constraint firstAttribute="width" constant="55" id="ZOu-i2-NOk"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                            <constraints>
+                                                <constraint firstItem="EoN-Nu-bqK" firstAttribute="centerX" secondItem="Jlb-9f-ZXD" secondAttribute="centerX" id="8uC-Ux-7PR"/>
+                                                <constraint firstAttribute="width" constant="60" id="9UU-RS-ovR"/>
+                                                <constraint firstAttribute="height" constant="30" id="ONm-bK-cYB"/>
+                                                <constraint firstItem="EoN-Nu-bqK" firstAttribute="centerY" secondItem="Jlb-9f-ZXD" secondAttribute="centerY" id="nX2-0W-hvi"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="YS5-zt-ZoI" firstAttribute="leading" secondItem="fxX-5Q-VpM" secondAttribute="leading" id="1V8-tj-fBP"/>
                                         <constraint firstAttribute="trailing" secondItem="Eo4-jo-9Ie" secondAttribute="trailing" constant="8" id="9xY-9d-33W"/>
+                                        <constraint firstItem="Jlb-9f-ZXD" firstAttribute="top" secondItem="YS5-zt-ZoI" secondAttribute="bottom" constant="8" symbolic="YES" id="CTj-hN-qsh"/>
                                         <constraint firstItem="Eo4-jo-9Ie" firstAttribute="top" secondItem="YS5-zt-ZoI" secondAttribute="bottom" constant="8" id="HM7-GW-fmv"/>
                                         <constraint firstItem="Eo4-jo-9Ie" firstAttribute="leading" secondItem="fxX-5Q-VpM" secondAttribute="leading" constant="312" id="MTB-X7-QfM"/>
                                         <constraint firstAttribute="trailing" secondItem="YS5-zt-ZoI" secondAttribute="trailing" id="cRD-qc-Cqu"/>
+                                        <constraint firstItem="Jlb-9f-ZXD" firstAttribute="leading" secondItem="fxX-5Q-VpM" secondAttribute="leading" constant="244" id="l2D-Ga-jtI"/>
+                                        <constraint firstAttribute="bottom" secondItem="Jlb-9f-ZXD" secondAttribute="bottom" constant="12" id="o4k-Bn-oKS"/>
                                         <constraint firstAttribute="bottom" secondItem="Eo4-jo-9Ie" secondAttribute="bottom" constant="12" id="wP7-Qo-exy"/>
                                         <constraint firstItem="YS5-zt-ZoI" firstAttribute="top" secondItem="fxX-5Q-VpM" secondAttribute="top" id="wWw-sh-2oG"/>
                                     </constraints>
@@ -481,6 +506,8 @@
                                     <outlet property="containerView" destination="fxX-5Q-VpM" id="BCO-aI-6CL"/>
                                     <outlet property="friendPhoto" destination="YS5-zt-ZoI" id="mtN-ci-LT0"/>
                                     <outlet property="likeControl" destination="Eo4-jo-9Ie" id="j8g-Th-Kmc"/>
+                                    <outlet property="numberOfLikes" destination="EoN-Nu-bqK" id="gq1-zP-pod"/>
+                                    <outlet property="numberOfLikesView" destination="Jlb-9f-ZXD" id="6Uk-Vd-HYs"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
