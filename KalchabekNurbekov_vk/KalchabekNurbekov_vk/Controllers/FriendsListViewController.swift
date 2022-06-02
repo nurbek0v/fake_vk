@@ -187,7 +187,9 @@ class FriendsListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         String(sortedFriends.keys.sorted()[section])
     }
-   
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "GoDetail", sender: nil)
+    }
 
 }
 extension FriendsListViewController: UISearchBarDelegate {
