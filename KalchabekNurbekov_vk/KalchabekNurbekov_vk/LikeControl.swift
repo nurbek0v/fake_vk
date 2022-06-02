@@ -14,9 +14,9 @@ class LikeControl: UIControl {
     var isLike: Bool = false
     
     override func awakeFromNib() {
-        likePicture.backgroundColor = UIColor.gray
+      
         likePicture.tintColor = .blue
-        likePicture.layer.cornerRadius = likePicture.bounds.height / 3
+        likePicture.layer.cornerRadius = likePicture.bounds.height / 2
         likePicture.image = UIImage(systemName: "suit.heart")
       
         

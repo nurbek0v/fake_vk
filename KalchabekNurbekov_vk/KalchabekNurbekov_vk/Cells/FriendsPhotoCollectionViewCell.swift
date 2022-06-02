@@ -17,8 +17,7 @@ class FriendsPhotoCollectionViewCell: UICollectionViewCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tap.numberOfTapsRequired = 2
         containerView.addGestureRecognizer(tap)
-        
-        
+   
         
         
         
