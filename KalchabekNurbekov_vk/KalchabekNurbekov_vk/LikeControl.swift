@@ -9,13 +9,16 @@ import UIKit
 
 class LikeControl: UIControl {
 
-    @IBOutlet var likePicture: UIImageView!
+    @IBOutlet public var likePicture: UIImageView!
     
     var isLike: Bool = false
     
     override func awakeFromNib() {
-        likePicture.backgroundColor = .clear
-        likePicture.tintColor = .red
+        likePicture.backgroundColor = UIColor.gray
+        likePicture.tintColor = .blue
+        likePicture.layer.cornerRadius = likePicture.bounds.height / 3
+        likePicture.image = UIImage(systemName: "suit.heart")
+      
         
     }
 

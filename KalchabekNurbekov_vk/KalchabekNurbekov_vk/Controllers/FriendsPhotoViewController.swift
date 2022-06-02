@@ -14,6 +14,8 @@ class FriendsPhotoViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
 
     }
     

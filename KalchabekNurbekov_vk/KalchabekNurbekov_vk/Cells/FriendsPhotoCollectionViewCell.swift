@@ -18,15 +18,35 @@ class FriendsPhotoCollectionViewCell: UICollectionViewCell {
         tap.numberOfTapsRequired = 2
         containerView.addGestureRecognizer(tap)
         
+        
+        
+        
+        
     }
     
     @objc func handleTap(_ : UIGestureRecognizer) {
         likeControl.isLike.toggle()
         
         if likeControl.isLike {
-            likeControl.likePicture.image = UIImage(systemName: "suit.heart.fill")
+            UIView.animateKeyframes(withDuration: 0.1, delay: 0, options: .calculationModeCubic, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 1, animations: {
+                    self.likeControl.likePicture.image = UIImage(systemName: "suit.heart.fill")
+                })
+                UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 1, animations: {
+                    self.likeControl.likePicture.tintColor = .red
+                })
+            }, completion: nil)
+            
         } else {
-            likeControl.likePicture.image = UIImage(systemName: "suit.heart")
+            UIView.animateKeyframes(withDuration: 0.1, delay: 0, options: .calculationModeCubic, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 1, animations: {
+                    self.likeControl.likePicture.image = UIImage(systemName: "suit.heart")
+                })
+                UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 1, animations: {
+                    self.likeControl.likePicture.tintColor = .blue
+                })
+            }, completion: nil)
+           // likeControl.likePicture.image = UIImage(systemName: "suit.heart")
         }
     
     }
