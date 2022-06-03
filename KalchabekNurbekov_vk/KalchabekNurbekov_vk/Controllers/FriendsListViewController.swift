@@ -13,16 +13,16 @@ class FriendsListViewController: UITableViewController {
             searchBarFriends.delegate = self
         }
     }
-
+    
     
     public var MyFriends = [
         
-       Friend(name: "Oscar Isaac",
-              age: "43 года",
-              avatar: UIImage(named: "OscarIsaac"),
-              photos: [UIImage(named: "OscarIsaac")!,
-                    UIImage(named: "OscarIsaac2")!,
-                    UIImage(named: "OscarIsaac3")!]),
+        Friend(name: "Oscar Isaac",
+               age: "43 года",
+               avatar: UIImage(named: "OscarIsaac"),
+               photos: [UIImage(named: "OscarIsaac")!,
+                        UIImage(named: "OscarIsaac2")!,
+                        UIImage(named: "OscarIsaac3")!]),
         Friend(name: "Elon Mask",
                age: "50 года",
                avatar: UIImage(named: "ElonMask"),
@@ -78,7 +78,7 @@ class FriendsListViewController: UITableViewController {
                         UIImage(named: "Mark_Zuckerberg")!,
                         UIImage(named: "Mark_Zuckerberg")!]),
         
-        ]
+    ]
     var filteredFriends = [Friend]()
     var sortedFriends = [Character: [Friend]]()
     
@@ -87,8 +87,8 @@ class FriendsListViewController: UITableViewController {
         
         tableView.register(UINib(nibName: "FriendXibTableViewCell", bundle: nil), forCellReuseIdentifier: "FriendXibTableViewCell")
         self.sortedFriends = sort(friends: MyFriends)
-
-
+        
+        
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.navigationItem.leftBarButtonItem?.title = "Unfollow"
         
@@ -107,19 +107,19 @@ class FriendsListViewController: UITableViewController {
         }
         return friendDict
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sortedFriends.keys.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let keysSorted = sortedFriends.keys.sorted()
         let friends = sortedFriends[keysSorted[section]]?.count ?? 0
         return friends
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendXibTableViewCell", for: indexPath) as! FriendXibTableViewCell
@@ -132,14 +132,14 @@ class FriendsListViewController: UITableViewController {
         cell.friendAgeLabel.text = friend.age
         
         
-
-
+        
+        
         return cell
     }
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
-
+    
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -170,7 +170,7 @@ class FriendsListViewController: UITableViewController {
             
         }
     }
-
+    
     
     // MARK: - Navigation
     
@@ -179,8 +179,11 @@ class FriendsListViewController: UITableViewController {
         guard segue.identifier == "GoDetail" else { return }
         let destination = segue.destination as! FriendsPhotoViewController
         let indexPath = tableView.indexPathForSelectedRow!
-            destination.photoArray = MyFriends[indexPath.row].photos
-            
+        let firstChar = sortedFriends.keys.sorted()[indexPath.section]
+        let friends = sortedFriends[firstChar]!
+        let friend: Friend = friends[indexPath.row]
+        destination.photoArray = friend.photos
+        
         
         
     }
@@ -191,7 +194,7 @@ class FriendsListViewController: UITableViewController {
         performSegue(withIdentifier: "GoDetail", sender: nil)
         
     }
-
+    
 }
 extension FriendsListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
