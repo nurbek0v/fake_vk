@@ -509,6 +509,7 @@
                                     <outlet property="likeControl" destination="Eo4-jo-9Ie" id="j8g-Th-Kmc"/>
                                     <outlet property="numberOfLikes" destination="EoN-Nu-bqK" id="gq1-zP-pod"/>
                                     <outlet property="numberOfLikesView" destination="Jlb-9f-ZXD" id="6Uk-Vd-HYs"/>
+                                    <segue destination="wBU-RY-Iwv" kind="show" identifier="ShowBigPhoto" id="XPt-kF-yGO"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -522,6 +523,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heA-qK-uRC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3308.6956521739135" y="-250.44642857142856"/>
+        </scene>
+        <!--Friends Big Photo View Controller-->
+        <scene sceneID="Mkg-gF-RnU">
+            <objects>
+                <viewController id="wBU-RY-Iwv" customClass="FriendsBigPhotoViewController" customModule="KalchabekNurbekov_vk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4ci-ZS-NV4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gs5-6Y-LQt">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="05b-CH-eBR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="05b-CH-eBR" firstAttribute="bottom" secondItem="gs5-6Y-LQt" secondAttribute="bottom" id="XtE-dv-2B0"/>
+                            <constraint firstItem="gs5-6Y-LQt" firstAttribute="top" secondItem="05b-CH-eBR" secondAttribute="top" id="YKk-HY-yDZ"/>
+                            <constraint firstItem="05b-CH-eBR" firstAttribute="trailing" secondItem="gs5-6Y-LQt" secondAttribute="trailing" id="pOX-XL-Krk"/>
+                            <constraint firstItem="gs5-6Y-LQt" firstAttribute="leading" secondItem="05b-CH-eBR" secondAttribute="leading" id="pPN-I5-yX5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="H7U-NE-1v9"/>
+                    <connections>
+                        <outlet property="bigPhotoImage" destination="gs5-6Y-LQt" id="sre-de-mV9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5mB-9k-kBw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4206" y="-250"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="MRW-Rl-Cn7">

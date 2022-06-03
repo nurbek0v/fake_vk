@@ -35,6 +35,15 @@ class FriendsPhotoViewController: UICollectionViewController {
     
         return cell
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowBigPhoto",
+           let selectPhoto = collectionView.indexPathsForSelectedItems?.first,
+           let bigPhoto = segue.destination as? FriendsBigPhotoViewController {
+            bigPhoto.bigPhotos = photoArray
+            bigPhoto.selectedPhotoIndex = selectPhoto.item
+        }
+           
+    }
 }
 
 extension FriendsPhotoViewController: UICollectionViewDelegateFlowLayout {
