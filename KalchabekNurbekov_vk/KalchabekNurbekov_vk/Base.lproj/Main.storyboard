@@ -401,6 +401,7 @@
                                     <outlet property="friendsAge" destination="xqh-dp-iIO" id="CjZ-zT-SdG"/>
                                     <outlet property="friendsName" destination="dLV-BA-mlR" id="rhd-Ei-vyK"/>
                                     <outlet property="friendsPhoto" destination="uGl-Pe-xf5" id="bMo-fi-iMW"/>
+                                    <outlet property="shadowView" destination="28c-UQ-0i2" id="v0c-FR-vb4"/>
                                     <segue destination="HWr-TK-uFK" kind="show" identifier="GoDetail" id="ZXB-26-fXg"/>
                                 </connections>
                             </tableViewCell>

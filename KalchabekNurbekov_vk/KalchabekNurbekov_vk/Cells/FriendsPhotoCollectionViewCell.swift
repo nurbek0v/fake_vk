@@ -59,6 +59,7 @@ class FriendsPhotoCollectionViewCell: UICollectionViewCell {
             }, completion: {_ in
                 UIView.transition(with: self.numberOfLikesView, duration: 0.5, options: .transitionFlipFromBottom, animations: {
                     self.numberOfLikes.text = "\(self.numberOfLike)"
+                    
                 }, completion: nil)
                 
                 
