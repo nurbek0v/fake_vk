@@ -103,6 +103,21 @@
                                             </view>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffg-p6-DWq">
+                                        <rect key="frame" x="85" y="610" width="204" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="JgP-fd-g5I"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="204" id="K2D-K1-90x"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Вход через ВК">
+                                            <color key="baseBackgroundColor" red="0.0" green="0.12589117080000001" blue="0.86087566609999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="enterButton:" destination="nSo-Fg-uXi" eventType="touchUpInside" id="Kaj-bH-xfq"/>
+                                            <segue destination="7Uj-X5-KPl" kind="show" id="w0P-2v-9g9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="mOE-AB-iec" firstAttribute="top" secondItem="JOR-e6-qnH" secondAttribute="top" constant="20" id="0z7-e7-Tex"/>
@@ -111,12 +126,14 @@
                                     <constraint firstItem="Gde-8C-fME" firstAttribute="centerX" secondItem="I21-c3-Rzy" secondAttribute="centerX" id="61G-LH-Rbl"/>
                                     <constraint firstItem="hKz-8t-oaO" firstAttribute="top" secondItem="0tp-y4-CVM" secondAttribute="bottom" constant="160" id="AXa-A6-XKF"/>
                                     <constraint firstItem="mOE-AB-iec" firstAttribute="centerX" secondItem="I21-c3-Rzy" secondAttribute="centerX" id="AwE-gS-ghx"/>
+                                    <constraint firstItem="ffg-p6-DWq" firstAttribute="top" secondItem="hKz-8t-oaO" secondAttribute="bottom" constant="68" id="BA4-j1-UMM"/>
                                     <constraint firstItem="mOE-AB-iec" firstAttribute="leading" secondItem="JOR-e6-qnH" secondAttribute="leading" constant="20" id="DcG-eb-AIJ"/>
                                     <constraint firstItem="Gde-8C-fME" firstAttribute="top" secondItem="mOE-AB-iec" secondAttribute="bottom" constant="29" id="GN5-L0-tIG"/>
                                     <constraint firstItem="JOR-e6-qnH" firstAttribute="trailing" secondItem="mOE-AB-iec" secondAttribute="trailing" constant="20" id="N40-1K-YQ7"/>
                                     <constraint firstItem="hKz-8t-oaO" firstAttribute="centerX" secondItem="I21-c3-Rzy" secondAttribute="centerX" id="Qlg-ym-jgO"/>
                                     <constraint firstItem="edH-Uh-5FE" firstAttribute="centerX" secondItem="I21-c3-Rzy" secondAttribute="centerX" id="TRw-vx-xGZ"/>
                                     <constraint firstItem="edH-Uh-5FE" firstAttribute="top" secondItem="9We-ps-Rqx" secondAttribute="bottom" constant="15" id="Udf-iB-39Y"/>
+                                    <constraint firstItem="ffg-p6-DWq" firstAttribute="centerX" secondItem="I21-c3-Rzy" secondAttribute="centerX" id="ees-7b-C3J"/>
                                     <constraint firstItem="0tp-y4-CVM" firstAttribute="centerX" secondItem="I21-c3-Rzy" secondAttribute="centerX" id="pqh-Tm-xgs"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="JOR-e6-qnH"/>
@@ -133,6 +150,7 @@
                             <constraint firstItem="I21-c3-Rzy" firstAttribute="centerX" secondItem="ner-vx-4Ub" secondAttribute="centerX" id="vCF-cL-c9O"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="K5W-YN-DW0"/>
                     <connections>
                         <outlet property="loadingStack" destination="edH-Uh-5FE" id="TIh-MW-mCG"/>
                         <outlet property="loginInput" destination="HJN-Pl-8TL" id="ls1-gC-PWn"/>
@@ -145,7 +163,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UMg-0N-Zjy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-242.0289855072464" y="230.35714285714283"/>
+            <point key="canvasLocation" x="-1019" y="230"/>
+        </scene>
+        <!--AuthVK View Controller-->
+        <scene sceneID="xQb-d6-Uue">
+            <objects>
+                <viewController id="7Uj-X5-KPl" customClass="AuthVKViewController" customModule="KalchabekNurbekov_vk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yrd-BH-ZAI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wnc-7N-swC">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Tmb-5I-MJ4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Wnc-7N-swC" firstAttribute="leading" secondItem="Tmb-5I-MJ4" secondAttribute="leading" id="DOc-6z-tTo"/>
+                            <constraint firstItem="Wnc-7N-swC" firstAttribute="top" secondItem="Tmb-5I-MJ4" secondAttribute="top" id="M8S-nU-rWL"/>
+                            <constraint firstItem="Tmb-5I-MJ4" firstAttribute="trailing" secondItem="Wnc-7N-swC" secondAttribute="trailing" id="TdN-nw-jbc"/>
+                            <constraint firstItem="Tmb-5I-MJ4" firstAttribute="bottom" secondItem="Wnc-7N-swC" secondAttribute="bottom" id="vNY-62-TGn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="rLY-N5-fBF"/>
+                    <connections>
+                        <outlet property="WebView" destination="Wnc-7N-swC" id="hFI-eu-uRa"/>
+                        <segue destination="nSo-Fg-uXi" kind="presentation" identifier="AuthVKUnsuccessful" modalPresentationStyle="fullScreen" id="YQ9-jU-t5R"/>
+                        <segue destination="zAS-fc-LuX" kind="presentation" identifier="AuthVKSuccessful" modalPresentationStyle="fullScreen" id="8oZ-sR-sGO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qnc-Bz-1s8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1020" y="1039"/>
         </scene>
         <!--My Groups-->
         <scene sceneID="ftR-dB-9Uz">
@@ -558,6 +613,7 @@
         <scene sceneID="MRW-Rl-Cn7">
             <objects>
                 <tabBarController id="zAS-fc-LuX" customClass="MainMenuViewController" customModule="KalchabekNurbekov_vk" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Hwu-iO-E4j"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nky-iM-aNr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -793,6 +849,9 @@
             <point key="canvasLocation" x="1558" y="1308"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="8oZ-sR-sGO"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>
         <image name="bubble.left" catalog="system" width="128" height="110"/>

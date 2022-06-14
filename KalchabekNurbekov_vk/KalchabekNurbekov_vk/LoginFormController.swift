@@ -11,8 +11,9 @@ import Foundation
 
 class LoginFormController: UIViewController {
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    let session = Session.instance //синглтон текущей сессии
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var loadingStack: UIStackView!
     @IBOutlet weak var pointOne: UIView!
     @IBOutlet weak var pointTwo: UIView!

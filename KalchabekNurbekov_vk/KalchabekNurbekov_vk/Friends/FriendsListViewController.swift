@@ -16,7 +16,6 @@ class FriendsListViewController: UITableViewController {
     
     
     public var MyFriends = [
-        
         Friend(name: "Oscar Isaac",
                age: "43 года",
                avatar: UIImage(named: "OscarIsaac"),
@@ -39,7 +38,6 @@ class FriendsListViewController: UITableViewController {
                age: "45 года",
                avatar: UIImage(named: "Dwayne Johnson"),
                photos: [UIImage(named: "Dwayne Johnson")!,
-                        //UIImage(named: "Dwayne Johnson")!,
                         UIImage(named: "ZendayaMaree2")!,
                         UIImage(named: "Kylie Jenner")!,
                         UIImage(named: "Joe Biden")!,
@@ -95,6 +93,10 @@ class FriendsListViewController: UITableViewController {
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.navigationItem.leftBarButtonItem?.title = "Unfollow"
+        
+        
+        //получение данных из сети по нужным параметрам
+        GetDataFromServer().loadData(.namesAndAvatars)
         
     }
     private func sort(friends: [Friend]) -> [Character: [Friend]] {
