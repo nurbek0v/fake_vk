@@ -27,10 +27,10 @@ class FriendTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    func set(friend: Friend) {
-        self.friendsName.text = friend.name
-        self.friendsAge.text = friend.age
-        self.friendsPhoto.image = friend.avatar
-    }
+//    func set(friend: Friend) {
+//        self.friendsName.text = friend.name
+//        self.friendsAge.text = friend.age
+//        self.friendsPhoto.image = friend.avatar
+//    }
 
 }

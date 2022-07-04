@@ -38,14 +38,14 @@ class GetDataFromServer {
         switch parameters { //изменяющиеся параметры конструктора в зависимости от запроса
         case .namesAndAvatars:
             urlConstructor.path = "/method/friends.get"
-            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(Session.instance.userId)))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(Session.instance.userId!)))
             urlConstructor.queryItems?.append(URLQueryItem(name: "fields", value: "photo_50"))
         case .photos:
             urlConstructor.path = "/method/photos.getAll"
-            urlConstructor.queryItems?.append(URLQueryItem(name: "owner_id", value: String(Session.instance.userId)))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "owner_id", value: String(Session.instance.userId!)))
         case .groups:
             urlConstructor.path = "/method/groups.get"
-            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(Session.instance.userId)))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(Session.instance.userId!)))
             urlConstructor.queryItems?.append(URLQueryItem(name: "extended", value: "1"))
         case .searchGroups:
             urlConstructor.path = "/method/groups.search"

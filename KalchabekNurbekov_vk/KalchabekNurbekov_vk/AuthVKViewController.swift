@@ -14,8 +14,11 @@ class AuthVKViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         WebView.navigationDelegate = self
         loadAuthVK()
+       // print(session.token)
+        //print(session.userId)
 
     }
     @IBOutlet weak var WebView: WKWebView!
@@ -79,6 +82,7 @@ extension AuthVKViewController: WKNavigationDelegate {
         if let token = params["access_token"], let userID = params["user_id"] {
             session.token = token
             session.userId = Int(userID)!
+            
             
             decisionHandler(.cancel)
             

@@ -33,6 +33,7 @@ class FriendsGroupViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         tableView.register(UINib(nibName: "FriendXibTableViewCell", bundle: nil), forCellReuseIdentifier: "FriendXibTableViewCell")
        
       self.sortedGroups = sort(group: MyGroups)

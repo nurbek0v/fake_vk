@@ -10,7 +10,8 @@ import UIKit
 
 struct Friend {
     var name: String
-    var age: String
-    var avatar: UIImage?
-    var photos: [UIImage] = []
+    //var age: String
+    var avatar: String
+    //var photos: [UIImage] = []
+    var ownerId: String
 }

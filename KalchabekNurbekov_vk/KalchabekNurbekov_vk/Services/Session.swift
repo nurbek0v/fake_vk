@@ -12,6 +12,6 @@ class Session {
     static let instance = Session()
     private init() {}
     
-    var token: String = "" // токен ВК
-    var userId: Int = 0 // Идентификатор пользователя ВК
+    var token: String? // токен ВК
+    var userId: Int?// Идентификатор пользователя ВК
 }
