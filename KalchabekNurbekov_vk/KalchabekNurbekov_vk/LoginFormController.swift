@@ -15,10 +15,17 @@ class LoginFormController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var loadingStack: UIStackView!
-    @IBOutlet weak var pointOne: UIView!
+    @IBOutlet weak var pointOne: UIView! //одна из трех точек в анимации загрузки
     @IBOutlet weak var pointTwo: UIView!
     @IBOutlet weak var pointThree: UIView!
-    @IBAction func enterButton(_ sender: Any) {
+    
+    func setupPoints() { //функция изменения формы точек анимации
+        pointOne.layer.cornerRadius = pointOne.bounds.height/2
+        pointTwo.layer.cornerRadius = pointTwo.bounds.height/2
+        pointThree.layer.cornerRadius = pointThree.bounds.height/2
+    }
+    
+    func loadingAnimation() {  //Анимация загрузки
         loadingStack.isHidden = false
         loginInput.isHidden = true
         passwordInput.isHidden = true
@@ -39,15 +46,24 @@ class LoginFormController: UIViewController {
 
         },
                                 completion: nil)
+        
     }
-    @IBOutlet weak var loginInput: UITextField!
-    @IBOutlet weak var passwordInput: UITextField!
+    //Анимация загрузки при нажатии на кнопку входа
+    @IBAction func enterButton(_ sender: Any) {
+       loadingAnimation()
+    }
+    //Анимация загрузки при нажатии на конпку входа через ВК
+    @IBAction func loginWithVk(_ sender: Any) {
+        loadingAnimation()
+
+    }
+    
+    @IBOutlet weak var loginInput: UITextField! //Поле для ввода логина
+    @IBOutlet weak var passwordInput: UITextField! //Поле для ввода пароля
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pointOne.layer.cornerRadius = pointOne.bounds.height/2
-        pointTwo.layer.cornerRadius = pointTwo.bounds.height/2
-        pointThree.layer.cornerRadius = pointThree.bounds.height/2
+        setupPoints()
        
         loadingStack.isHidden = true
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(hideScreen))
@@ -83,7 +99,7 @@ class LoginFormController: UIViewController {
         if !checkResult { showLoginError()
         }
         return checkResult }
-    func checkUserData() -> Bool {
+    func checkUserData() -> Bool { //Проверяем соответствие логина и пароля
         guard let login = loginInput.text,
               let password = passwordInput.text else { return false }
         if login == "" && password == "" { return true
@@ -91,7 +107,7 @@ class LoginFormController: UIViewController {
             return false
         }
     }
-    func showLoginError() {
+    func showLoginError() { //Обработка ошибок при неправильном вводе логина или пароля
         let alter = UIAlertController(title: "Ошибка", message: "Введены не верные данные пользователя", preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alter.addAction(action)

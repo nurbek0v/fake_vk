@@ -10,8 +10,17 @@ import UIKit
 
 struct Friend {
     var name: String
-    //var age: String
-    var avatar: String
+   var avatar: String?
     //var photos: [UIImage] = []
-    var ownerId: String
+    var ownerId: Int
+    //var city: String
+//    var isClosed: Bool?
+//    var trackCode: String
+//    var canAccess: Bool?
 }
+//struct User {
+//    let image: UIImage?
+//    let name: String
+//    let photos: [UIImage?]?
+//    //let friends: [PFriends]
+//}

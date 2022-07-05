@@ -13,110 +13,25 @@ class FriendsListViewController: UITableViewController {
             searchBarFriends.delegate = self
         }
     }
-    var dataSource:FriendsResponse?
-    let service = FriendService()
-    var friendList:[Friend] = []
     
-//    public var MyFriends = [
-//        Friend(name: "Oscar Isaac",
-//               age: "43 года",
-//               avatar: UIImage(named: "OscarIsaac"),
-//               photos: [UIImage(named: "OscarIsaac")!,
-//                        UIImage(named: "OscarIsaac2")!,
-//                        UIImage(named: "OscarIsaac3")!]),
-//        Friend(name: "Elon Mask",
-//               age: "50 года",
-//               avatar: UIImage(named: "ElonMask"),
-//               photos: [UIImage(named: "ElonMask")!,
-//                        UIImage(named: "ElonMask2")!,
-//                        UIImage(named: "ElonMask3")!]),
-//        Friend(name: "Zendaya Maree",
-//               age: "25 года",
-//               avatar: UIImage(named: "ZendayaMaree"),
-//               photos: [UIImage(named: "ZendayaMaree")!,
-//                        UIImage(named: "ZendayaMaree2")!,
-//                        UIImage(named: "ZendayaMaree3")!]),
-//        Friend(name: "Dwayne Johnson",
-//               age: "45 года",
-//               avatar: UIImage(named: "Dwayne Johnson"),
-//               photos: [UIImage(named: "Dwayne Johnson")!,
-//                        UIImage(named: "ZendayaMaree2")!,
-//                        UIImage(named: "Kylie Jenner")!,
-//                        UIImage(named: "Joe Biden")!,
-//                        UIImage(named: "Mark_Zuckerberg")!,
-//                        UIImage(named: "Dwayne Johnson")!]),
-//        Friend(name: "Joe Biden",
-//               age: "18 года",
-//               avatar: UIImage(named: "Joe Biden"),
-//               photos: [UIImage(named: "Joe Biden")!,
-//                        UIImage(named: "Joe Biden")!,
-//                        UIImage(named: "Joe Biden")!]),
-//        Friend(name: "Jeff Bezos",
-//               age: "29 года",
-//               avatar: UIImage(named: "Jeff Bezos"),
-//               photos: [UIImage(named: "Jeff Bezos")!,
-//                        UIImage(named: "Jeff Bezos")!,
-//                        UIImage(named: "Jeff Bezos")!]),
-//        Friend(name: "LeBron James",
-//               age: "34 года",
-//               avatar: UIImage(named: "Lebron James"),
-//               photos: [UIImage(named: "Lebron James")!,
-//                        UIImage(named: "Lebron James")!,
-//                        UIImage(named: "Lebron James")!]),
-//        Friend(name: "Kylie Jenner",
-//               age: "17 года",
-//               avatar: UIImage(named: "Kylie Jenner"),
-//               photos: [UIImage(named: "Kylie Jenner")!,
-//                        UIImage(named: "Kylie Jenner")!,
-//                        UIImage(named: "Kylie Jenner")!]),
-//        Friend(name: "Kim Kardashian",
-//               age: "47 года",
-//               avatar: UIImage(named: "Kim_Kardashian"),
-//               photos: [UIImage(named: "Kim_Kardashian")!,
-//                        UIImage(named: "Kim_Kardashian")!,
-//                        UIImage(named: "Kim_Kardashian")!]),
-//        Friend(name: "Mark Zuckerberg",
-//               age: "35 года",
-//               avatar: UIImage(named: "Mark_Zuckerberg"),
-//               photos: [UIImage(named: "Mark_Zuckerberg")!,
-//                        UIImage(named: "Mark_Zuckerberg")!,
-//                        UIImage(named: "Mark_Zuckerberg")!]),
-//
-//    ]
-    var filteredFriends = [Friend]()
+    let service = FriendService()
+    var response:FriendsResponse?
+    var filtUsers = [Friend]()
+   // var filteredFriends = [Friend]()
   // var sortedFriends = [Character: []]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        service.loadUsers { result in
-            switch result {
-            case .success(let user):
-                DispatchQueue.main.async {
-                    self.friendList = user
-                    //тут тоже вроде фильтруется
-//                    self.filtUsers = (self.userModel?.response.items
-//                        .filter( { $0.firstName != "DELETED" } )
-//                        .map( { User(image: nil, name: $0.firstName + " " + $0.lastName, photos: nil) } ))!
-                    
-    
-
-                    self.tableView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+        fetchUser()
+       
         
         tableView.register(UINib(nibName: "FriendXibTableViewCell", bundle: nil), forCellReuseIdentifier: "FriendXibTableViewCell")
-      //  self.sortedFriends = sort(friends: self.friendList)
+   
         
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.navigationItem.leftBarButtonItem?.title = "Unfollow"
-        
-        
-        //получение данных из сети по нужным параметрам
-       //GetDataFromServer().loadData(.namesAndAvatars)
+    
         
         
     }
@@ -147,24 +62,17 @@ class FriendsListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let keysSorted = sortedFriends.keys.sorted()
-//        let friends = sortedFriends[keysSorted[section]]?.count ?? 0
-    return friendList.count
+        return filtUsers.count
+     
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendXibTableViewCell", for: indexPath) as! FriendXibTableViewCell
-        let post = friendList[indexPath.row]
-        cell.friendNameLabel.text = post.name
-        cell.friendAgeLabel.text = post.ownerId
-//
-//        let firstChar = sortedFriends.keys.sorted()[indexPath.section]
-//        let friends = sortedFriends[firstChar]!
-//        let friend: Friend = friends[indexPath.row]
-//        cell.friendImageView.image = friend.avatar
-//        cell.friendNameLabel.text = friend.name
-//        cell.friendAgeLabel.text = friend.age
+        cell.friendNameLabel.text = filtUsers[indexPath.row].name
+        cell.friendAgeLabel.text = nil
+        guard let imgUrl = URL(string: filtUsers[indexPath.row].avatar!) else { return cell }
+        cell.friendImageView.load(url: imgUrl)
         
         
         
@@ -241,4 +149,25 @@ extension FriendsListViewController: UISearchBarDelegate {
 //        sortedFriends = sort(friends: filteredFriends)
 //        tableView.reloadData()
 //    }
+}
+private extension FriendsListViewController {
+    func fetchUser() {
+        service.loadUsers { result in
+            switch result {
+            case .success(let friend):
+                DispatchQueue.main.async {
+                    self.response = friend
+                    //тут тоже вроде фильтруется
+                    self.filtUsers = (self.response?.response.items
+                     .filter( { $0.firstName != "DELETED" } )
+                                        .map( {Friend(name: $0.firstName + " " + $0.lastName, avatar: $0.avatar, ownerId: $0.id)} ))!
+    
+
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }

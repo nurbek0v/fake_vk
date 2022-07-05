@@ -115,6 +115,7 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="enterButton:" destination="nSo-Fg-uXi" eventType="touchUpInside" id="Kaj-bH-xfq"/>
+                                            <action selector="loginWithVk:" destination="nSo-Fg-uXi" eventType="touchUpInside" id="JOt-Af-gsr"/>
                                             <segue destination="7Uj-X5-KPl" kind="show" id="w0P-2v-9g9"/>
                                         </connections>
                                     </button>
