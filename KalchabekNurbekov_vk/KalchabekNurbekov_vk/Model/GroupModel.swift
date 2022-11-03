@@ -10,6 +10,6 @@ import UIKit
 
 struct Group {
     var name: String
-    var city: String
-    var image: UIImage
+   // var city: String
+    var image: String?
 }

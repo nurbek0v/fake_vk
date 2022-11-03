@@ -28,7 +28,7 @@ struct Item: Decodable {
     
     private enum CodingKeys: String, CodingKey {
         case id
-        case avatar  = "photo_50"
+        case avatar  = "photo_100"
         case firstName = "first_name"
         case lastName = "last_name"
         //case city = "city"
@@ -70,7 +70,7 @@ final class FriendService {
             URLQueryItem(name: "access_token", value: String(token)),
             URLQueryItem(name: "v", value: "5.131"),
             //URLQueryItem(name: "fields", value: "city"),
-            URLQueryItem(name: "fields", value: "photo_50")
+            URLQueryItem(name: "fields", value: "photo_100")
           
         ]
         

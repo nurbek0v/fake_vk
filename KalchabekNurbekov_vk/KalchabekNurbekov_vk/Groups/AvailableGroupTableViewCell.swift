@@ -24,8 +24,8 @@ class AvailableGroupTableViewCell: UITableViewCell {
     }
     func set(group: Group) {
         self.availableGroupName.text = group.name
-        self.availableGroupCity.text = group.city
-        self.availableGroupImage.image = group.image
+       // self.availableGroupCity.text = group.city
+        //self.availableGroupImage.image = group.image
     }
 
 }

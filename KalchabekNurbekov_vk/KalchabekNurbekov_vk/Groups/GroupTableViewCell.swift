@@ -27,8 +27,8 @@ class GroupTableViewCell: UITableViewCell {
     }
     func set(group: Group) {
         self.groupName.text = group.name
-        self.groupCity.text = group.city
-        self.groupImage.image = group.image
+        //self.groupCity.text = group.city
+        //self.groupImage.image = group.image
     }
     
 }

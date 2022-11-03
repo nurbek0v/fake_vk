@@ -58,6 +58,7 @@ class LoginFormController: UIViewController {
 
     }
     
+    
     @IBOutlet weak var loginInput: UITextField! //Поле для ввода логина
     @IBOutlet weak var passwordInput: UITextField! //Поле для ввода пароля
     

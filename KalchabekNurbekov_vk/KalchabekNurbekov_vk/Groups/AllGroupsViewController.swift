@@ -14,24 +14,24 @@ class AllGroupsViewController: UITableViewController {
         }
     }
     
-    var availableGroup = [
-        Group(name: "Mandarin language", city: "Shangahi", image: .init(named: "mandarin")!),
-        Group(name: "Love", city: "Paris", image: .init(named: "love")!),
-        Group(name: "Football", city: "Madrid", image: .init(named: "football")!),
-        Group(name: "Mandarin language", city: "Shangahi", image: .init(named: "mandarin")!),
-        Group(name: "Love", city: "Paris", image: .init(named: "love")!),
-        Group(name: "Football", city: "Madrid", image: .init(named: "football")!),
-        Group(name: "Mandarin language", city: "Shangahi", image: .init(named: "mandarin")!),
-        Group(name: "Love", city: "Paris", image: .init(named: "love")!),
-        Group(name: "Football", city: "Madrid", image: .init(named: "football")!)
-    ]
+  //  var availableGroup = [
+//        Group(name: "Mandarin language", city: "Shangahi", image: .init(named: "mandarin")!),
+//        Group(name: "Love", city: "Paris", image: .init(named: "love")!),
+//        Group(name: "Football", city: "Madrid", image: .init(named: "football")!),
+//        Group(name: "Mandarin language", city: "Shangahi", image: .init(named: "mandarin")!),
+//        Group(name: "Love", city: "Paris", image: .init(named: "love")!),
+//        Group(name: "Football", city: "Madrid", image: .init(named: "football")!),
+//        Group(name: "Mandarin language", city: "Shangahi", image: .init(named: "mandarin")!),
+//        Group(name: "Love", city: "Paris", image: .init(named: "love")!),
+//        Group(name: "Football", city: "Madrid", image: .init(named: "football")!)
+ //   ]
     
     var filteredAvailableGroup = [Group]()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        filteredAvailableGroup = availableGroup
+       // filteredAvailableGroup = availableGroup
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -103,13 +103,13 @@ class AllGroupsViewController: UITableViewController {
 
 }
 extension AllGroupsViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText .isEmpty {
-            filteredAvailableGroup = availableGroup
-        } else {
-            filteredAvailableGroup = availableGroup.filter {$0.name.lowercased().contains(searchText.lowercased())}
-        }
-        tableView.reloadData()
-    }
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if searchText .isEmpty {
+//            filteredAvailableGroup = availableGroup
+//        } else {
+//            filteredAvailableGroup = availableGroup.filter {$0.name.lowercased().contains(searchText.lowercased())}
+//        }
+//        tableView.reloadData()
+//    }
     
 }
