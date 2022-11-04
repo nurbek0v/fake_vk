@@ -77,10 +77,10 @@ final class FriendService {
         guard let url = urlComponents.url else {return}
         
         let request = URLRequest(url: url)
-        print(request)
+       // print(request)
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print(error)
+                print(error.localizedDescription)
             }
            
             guard let data = data else {

@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 struct Friend {
-    var name: String
+   var name: String
    var avatar: String?
-    //var photos: [UIImage] = []
+//    //var photos: [UIImage] = []
     var ownerId: Int
     //var city: String
 //    var isClosed: Bool?
