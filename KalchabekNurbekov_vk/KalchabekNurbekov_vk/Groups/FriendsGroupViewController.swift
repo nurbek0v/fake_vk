@@ -23,17 +23,10 @@ class FriendsGroupViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Title", size: 20)]
         fetchGroups()
         tableView.register(UINib(nibName: "FriendXibTableViewCell", bundle: nil), forCellReuseIdentifier: "FriendXibTableViewCell")
        
-     // self.sortedGroups = sort(group: MyGroups)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.leftBarButtonItem = self.editButtonItem
-        self.navigationItem.leftBarButtonItem?.title = "Unfollow"
     }
 //    private func sort(group: [Group]) -> [Character: [Group]] {
 //        var groupDict = [Character: [Group]] ()
@@ -76,6 +69,10 @@ class FriendsGroupViewController: UITableViewController {
 //        cell.friendNameLabel.text = group.name
 //        cell.friendAgeLabel.text = group.city
         cell.friendNameLabel.text = filtGroups[indexPath.row].name
+        guard let imgUrl = URL(string: (filtGroups[indexPath.row].image!)) else { return cell }
+        cell.friendImageView.load(url: imgUrl)
+        cell.friendAgeLabel.text = filtGroups[indexPath.row].activity
+       
 
         return cell
     }
@@ -163,7 +160,7 @@ private extension FriendsGroupViewController {
                     //тут тоже вроде фильтруется
                     self.filtGroups = (self.response?.response.items
                                         .filter( { $0.name != "DELETED"} )
-                                        .map( {Group(name: $0.name, image: $0.logo)} ))!
+                                        .map( {Group(name: $0.name, image: $0.logo, activity: $0.activity)} ))!
     
 
                     self.tableView.reloadData()

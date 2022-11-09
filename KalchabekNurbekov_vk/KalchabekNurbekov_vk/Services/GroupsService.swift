@@ -20,26 +20,24 @@ struct GroupsResponse:  Decodable {
         var items: [Item]
         
         struct Item: Decodable {
+            var id: Int
             var name: String
-            var logo: String  // уже тут нужно писать желаемые названия
-            
-            // не нужные в приложении поля, которые есть в json-е
-            //var id: Int
-            //var screen_name: String
-            //var photo_50: String
-            
-            // enum и init нужны если нужно иметь другие названия переменных в отличии от даннных в json
-            // например: logo = "photo_50" (я хочу: logo, а в jsone это: photo_50 )
-            // но все равно нужно указать другие значения, например: name (без уточнения)
+            var activity: String
+            var logo: String
+    
             enum CodingKeys: String, CodingKey {
                 case name
-                case logo = "photo_50"
+                case logo = "photo_100"
+                case id
+                case activity
             }
             
             init(from decoder: Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 name = try container.decode(String.self, forKey: .name)
                 logo = try container.decode(String.self, forKey: .logo)
+                id = try container.decode(Int.self, forKey: .id)
+                activity = try container.decode(String.self, forKey: .activity)
             }
         }
     }
@@ -59,16 +57,17 @@ final class GroupsService {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/friends.get"
+        urlComponents.path = "/method/groups.get"
         urlComponents.queryItems = [
             URLQueryItem(name: "user_id", value: String(id)),
             URLQueryItem(name: "access_token", value: String(token)),
             URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "v", value: "5.131")
+            URLQueryItem(name: "v", value: "5.131"),
+            URLQueryItem(name: "fields", value: "activity")
         ]
         
         guard let url = urlComponents.url else {return}
-        
+        print(url)
         let request = URLRequest(url: url)
         print(request)
         URLSession.shared.dataTask(with: request) { data, response, error in

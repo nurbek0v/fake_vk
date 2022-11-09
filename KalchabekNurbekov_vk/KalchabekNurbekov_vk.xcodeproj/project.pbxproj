@@ -24,12 +24,10 @@
 		079678BC2832F853002D4F02 /* FriendXibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079678BA2832F853002D4F02 /* FriendXibTableViewCell.swift */; };
 		079678BD2832F853002D4F02 /* FriendXibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079678BB2832F853002D4F02 /* FriendXibTableViewCell.xib */; };
 		07C7586A2858FB2300CD52FF /* AuthVKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C758692858FB2300CD52FF /* AuthVKViewController.swift */; };
-		07C7586D2859044900CD52FF /* GetDataFromServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7586C2859044900CD52FF /* GetDataFromServer.swift */; };
 		07ED13C2280DBC3600BA784C /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED13C1280DBC3600BA784C /* FriendModel.swift */; };
 		07ED13C9280E3B1900BA784C /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED13C8280E3B1900BA784C /* GroupModel.swift */; };
 		07ED13CD280EC3C200BA784C /* FriendsPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED13CC280EC3C200BA784C /* FriendsPhotoCollectionViewCell.swift */; };
 		07F3AC78286C9DCD00A3BE86 /* FriendsService .swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3AC77286C9DCD00A3BE86 /* FriendsService .swift */; };
-		07F3AC7A286C9EAA00A3BE86 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3AC79286C9EAA00A3BE86 /* User.swift */; };
 		07F3AC7C2874A0DC00A3BE86 /* UIImageView extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3AC7B2874A0DC00A3BE86 /* UIImageView extension.swift */; };
 		07F3AC7E2874D16900A3BE86 /* GroupsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3AC7D2874D16900A3BE86 /* GroupsService.swift */; };
 		07FBF791280767360008E85B /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBF790280767360008E85B /* MainMenuViewController.swift */; };
@@ -58,12 +56,10 @@
 		079678BA2832F853002D4F02 /* FriendXibTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendXibTableViewCell.swift; sourceTree = "<group>"; };
 		079678BB2832F853002D4F02 /* FriendXibTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendXibTableViewCell.xib; sourceTree = "<group>"; };
 		07C758692858FB2300CD52FF /* AuthVKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVKViewController.swift; sourceTree = "<group>"; };
-		07C7586C2859044900CD52FF /* GetDataFromServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataFromServer.swift; sourceTree = "<group>"; };
 		07ED13C1280DBC3600BA784C /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
 		07ED13C8280E3B1900BA784C /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
 		07ED13CC280EC3C200BA784C /* FriendsPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		07F3AC77286C9DCD00A3BE86 /* FriendsService .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendsService .swift"; sourceTree = "<group>"; };
-		07F3AC79286C9EAA00A3BE86 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		07F3AC7B2874A0DC00A3BE86 /* UIImageView extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView extension.swift"; sourceTree = "<group>"; };
 		07F3AC7D2874D16900A3BE86 /* GroupsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsService.swift; sourceTree = "<group>"; };
 		07FBF790280767360008E85B /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
@@ -127,8 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				0725EFD22852625B00EEAA5A /* Session.swift */,
-				07C7586C2859044900CD52FF /* GetDataFromServer.swift */,
-				07F3AC79286C9EAA00A3BE86 /* User.swift */,
 				07F3AC77286C9DCD00A3BE86 /* FriendsService .swift */,
 				07F3AC7D2874D16900A3BE86 /* GroupsService.swift */,
 			);
@@ -258,10 +252,8 @@
 			files = (
 				07F3AC78286C9DCD00A3BE86 /* FriendsService .swift in Sources */,
 				074FD2C427F85B1E00B8C396 /* LoginFormController.swift in Sources */,
-				07C7586D2859044900CD52FF /* GetDataFromServer.swift in Sources */,
 				07F3AC7E2874D16900A3BE86 /* GroupsService.swift in Sources */,
 				078F892F284A480B00A1999C /* FriendsBigPhotoViewController.swift in Sources */,
-				07F3AC7A286C9EAA00A3BE86 /* User.swift in Sources */,
 				074FD2C027F85B1E00B8C396 /* AppDelegate.swift in Sources */,
 				079678BC2832F853002D4F02 /* FriendXibTableViewCell.swift in Sources */,
 				07FBF795280767A10008E85B /* FriendsGroupViewController.swift in Sources */,

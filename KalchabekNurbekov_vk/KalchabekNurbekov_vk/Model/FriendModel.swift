@@ -8,16 +8,16 @@
 import Foundation
 import UIKit
 
-struct Friend {
-   var name: String
-   var avatar: String?
+//struct Friend {
+  //  var name: String
+  //  var avatar: String?
 //    //var photos: [UIImage] = []
-    var ownerId: Int
-    //var city: String
+ //   var ownerId: Int
+  //  var city: String
 //    var isClosed: Bool?
 //    var trackCode: String
 //    var canAccess: Bool?
-}
+//}
 //struct User {
 //    let image: UIImage?
 //    let name: String

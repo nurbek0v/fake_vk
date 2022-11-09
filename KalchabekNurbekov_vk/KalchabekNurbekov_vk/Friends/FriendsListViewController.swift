@@ -5,7 +5,6 @@
 //  Created by Kalchabek Nurbekov on 13.04.2022.
 //
 import UIKit
-import Foundation
 
 class FriendsListViewController: UITableViewController {
     @IBOutlet var searchBarFriends: UISearchBar! {
@@ -13,43 +12,38 @@ class FriendsListViewController: UITableViewController {
             searchBarFriends.delegate = self
         }
     }
-    
+   
     let service = FriendService()
-    var response:FriendsResponse?
-    var filtUsers = [Friend]()
+    var response = [Item]()
+    //var filtUsers = [Friend]()
    // var filteredFriends = [Friend]()
   // var sortedFriends = [Character: []]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchUser()
-       
         
         tableView.register(UINib(nibName: "FriendXibTableViewCell", bundle: nil), forCellReuseIdentifier: "FriendXibTableViewCell")
-   
+        service.delegate = self
+        service.loadUsers()
+
         
-        
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
-        self.navigationItem.leftBarButtonItem?.title = "Unfollow"
-    
-        
-        
+       
     }
     
-    private func sort(friends: [Friend]) -> [Character: [Friend]] {
-        var friendDict = [Character: [Friend]] ()
-        friends.forEach() { friend in
-            guard let firstChar = friend.name.first else { return }
-            if var thisCharFriend = friendDict[firstChar] {
-                thisCharFriend.append(friend)
-                friendDict[firstChar] = thisCharFriend
-            } else {
-                friendDict[firstChar] = [friend]
-            }
-            
-        }
-        return friendDict
-    }
+//    private func sort(friends: [Friend]) -> [Character: [Friend]] {
+//        var friendDict = [Character: [Friend]] ()
+//        friends.forEach() { friend in
+//            guard let firstChar = friend.name.first else { return }
+//            if var thisCharFriend = friendDict[firstChar] {
+//                thisCharFriend.append(friend)
+//                friendDict[firstChar] = thisCharFriend
+//            } else {
+//                friendDict[firstChar] = [friend]
+//            }
+//
+//        }
+//        return friendDict
+//    }
     
     
        
@@ -62,16 +56,16 @@ class FriendsListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filtUsers.count
+        return response.count
      
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendXibTableViewCell", for: indexPath) as! FriendXibTableViewCell
-        cell.friendNameLabel.text = filtUsers[indexPath.row].name
-        cell.friendAgeLabel.text = nil
-        guard let imgUrl = URL(string: filtUsers[indexPath.row].avatar!) else { return cell }
+        cell.friendNameLabel.text = response[indexPath.row].firstName
+        cell.friendAgeLabel.text = String(response[indexPath.row].id)
+        guard let imgUrl = URL(string: (response[indexPath.row].avatar!)) else { return cell }
         cell.friendImageView.load(url: imgUrl)
         
         
@@ -88,7 +82,7 @@ class FriendsListViewController: UITableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+  //  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt //indexPath: IndexPath) {
 //        if editingStyle == .delete {
 //
 //            let firstChar = sortedFriends.keys.sorted()[indexPath.section]
@@ -112,7 +106,7 @@ class FriendsListViewController: UITableViewController {
 //
 //
 //        }
-    }
+  //  }
     
     
     // MARK: - Navigation
@@ -140,7 +134,7 @@ class FriendsListViewController: UITableViewController {
     
 }
 extension FriendsListViewController: UISearchBarDelegate {
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 //        if searchText .isEmpty {
 //            filteredFriends = MyFriends
 //        } else {
@@ -148,26 +142,40 @@ extension FriendsListViewController: UISearchBarDelegate {
 //        }
 //        sortedFriends = sort(friends: filteredFriends)
 //        tableView.reloadData()
-//    }
-}
-private extension FriendsListViewController {
-    func fetchUser() {
-        service.loadUsers { result in
-            switch result {
-            case .success(let friend):
-                DispatchQueue.main.async {
-                    self.response = friend
-                    //тут тоже вроде фильтруется
-                    self.filtUsers = (self.response?.response.items
-                     .filter( { $0.firstName != "DELETED" } )
-                                        .map( {Friend(name: $0.firstName + " " + $0.lastName, avatar: $0.avatar, ownerId: $0.id)} ))!
-    
-
-                    self.tableView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
 }
+extension FriendsListViewController: FriendServiceDelegate {
+    func didUpdateFrineds(items: [Item]) {
+        DispatchQueue.main.async {
+            self.response = items
+            self.tableView.reloadData()
+        }
+    }
+    
+    func didFinishWithError(error: Error) {
+        print("get error")
+    }
+    
+    
+}
+//private extension FriendsListViewController {
+//    func fetchUser() {
+//        service.loadUsers { result in
+//            switch result {
+//            case .success(let friend):
+//                DispatchQueue.main.async {
+//                    self.response = friend
+//                    //тут тоже вроде фильтруется
+////                    self.filtUsers = (self.response?.response.items
+////                     .filter( { $0.firstName != "DELETED" } )
+////                     .map( {Friend(name: $0.firstName + " " + $0.lastName, avatar: $0.avatar, ownerId: $0.id, city: $0.city.title)} ))!
+//
+//
+//                    self.tableView.reloadData()
+//                }
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
+//}

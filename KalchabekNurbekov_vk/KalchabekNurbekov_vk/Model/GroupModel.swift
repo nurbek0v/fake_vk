@@ -12,4 +12,5 @@ struct Group {
     var name: String
    // var city: String
     var image: String?
+    var activity: String
 }

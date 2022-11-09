@@ -274,7 +274,7 @@
                             <outlet property="delegate" destination="dKX-mk-ae7" id="rzQ-1e-FGF"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Groups" id="BXA-Rv-UaI">
+                    <navigationItem key="navigationItem" title="My Groups" largeTitleDisplayMode="always" id="BXA-Rv-UaI">
                         <barButtonItem key="rightBarButtonItem" title="Search" image="plus" catalog="system" id="oTu-gc-EWN"/>
                     </navigationItem>
                     <connections>
