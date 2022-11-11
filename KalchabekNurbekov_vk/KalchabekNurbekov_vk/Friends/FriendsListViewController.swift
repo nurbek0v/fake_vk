@@ -21,7 +21,8 @@ class FriendsListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.backgroundColor = .clear
+        view.backgroundColor = UIColor(named: "AccentColor")
         tableView.register(UINib(nibName: "FriendXibTableViewCell", bundle: nil), forCellReuseIdentifier: "FriendXibTableViewCell")
         service.delegate = self
         service.loadUsers()

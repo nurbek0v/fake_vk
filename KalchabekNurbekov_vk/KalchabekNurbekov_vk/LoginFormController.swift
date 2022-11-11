@@ -22,11 +22,12 @@ class LoginFormController: UIViewController {
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupPoints()
         
         loadingStack.isHidden = true
-        //let tapGR = UITapGestureRecognizer(target: self, action: #selector(hideScreen))
-       // view.addGestureRecognizer(tapGR)
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(hideScreen))
+        view.addGestureRecognizer(tapGR)
     }
    
     
@@ -69,10 +70,10 @@ class LoginFormController: UIViewController {
                                 completion: nil)
         
     }
-//
-//    @objc func hideScreen() {
-//        view.endEditing(true)
-//    }
+
+    @objc func hideScreen() {
+        view.endEditing(true)
+    }
     
     //MARK: - ViewWillApear
     

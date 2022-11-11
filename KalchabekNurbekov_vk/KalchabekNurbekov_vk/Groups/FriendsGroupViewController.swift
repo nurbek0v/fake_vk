@@ -24,6 +24,8 @@ class FriendsGroupViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Title", size: 20)]
+        tableView.backgroundColor = .clear
+        view.backgroundColor = UIColor(named: "AccentColor")
         fetchGroups()
         tableView.register(UINib(nibName: "FriendXibTableViewCell", bundle: nil), forCellReuseIdentifier: "FriendXibTableViewCell")
        
