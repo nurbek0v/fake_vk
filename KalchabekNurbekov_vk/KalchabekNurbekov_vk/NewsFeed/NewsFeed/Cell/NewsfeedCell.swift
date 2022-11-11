@@ -17,6 +17,13 @@ protocol FeedCellViewModel {
     var reposts: String? { get }
     var views: String? { get }
     var photoAttachment: FeedCellPhotoAttachmentViewModel? { get }
+    var sizes: FeedCellSizes { get }
+}
+protocol FeedCellSizes {
+    var postLabelFrame: CGRect { get }
+    var attachmentFrame: CGRect { get }
+    var bottomViewFrame: CGRect { get }
+    var totalHeight: CGFloat { get }
 }
 protocol FeedCellPhotoAttachmentViewModel {
     var photoURLString: String? { get }
@@ -24,6 +31,7 @@ protocol FeedCellPhotoAttachmentViewModel {
     var height: Int { get }
 }
 class NewsfeedCell: UITableViewCell {
+    @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var iconImageView: WebImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -34,15 +42,25 @@ class NewsfeedCell: UITableViewCell {
     @IBOutlet weak var repostsLabel: UILabel!
     @IBOutlet weak var viewsLabel: UILabel!
     
+    @IBOutlet weak var bottomView: UIView!
     
     
     static let reuseId = "NewsfeedCell"
+    override func prepareForReuse() {
+        iconImageView.set(imageURL: nil)
+        postImageView.set(imageURL: nil)
+    }
     
-    override class func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
     
-        //iconImageView.layer.cornerRadius = bounds.width / 2
-       // iconImageView.clipsToBounds = true
+    
+        iconImageView.layer.cornerRadius = iconImageView.frame.width / 2
+          iconImageView.clipsToBounds = true
+        cardView.layer.cornerRadius = 10
+        cardView.clipsToBounds = true
+        backgroundColor = .clear
+        selectionStyle = .none
         
     }
     func set(viewModel: FeedCellViewModel) {
@@ -54,6 +72,12 @@ class NewsfeedCell: UITableViewCell {
         commentsLabel.text = viewModel.comments
         repostsLabel.text = viewModel.reposts
         viewsLabel.text = viewModel.views
+        
+        postLabel.frame = viewModel.sizes.postLabelFrame
+        postImageView.frame = viewModel.sizes.attachmentFrame
+        bottomView.frame = viewModel.sizes.bottomViewFrame
+        
+        
         if let photoAttachment = viewModel.photoAttachment {
             postImageView.set(imageURL: photoAttachment.photoURLString)
             postImageView.isHidden = false
