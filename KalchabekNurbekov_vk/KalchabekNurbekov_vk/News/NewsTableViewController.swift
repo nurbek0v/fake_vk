@@ -8,6 +8,8 @@
 import UIKit
 
 class NewsTableViewController: UITableViewController {
+   
+    private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
     let myPosts = [
         Post(postAvatar: UIImage(named: "vacuum")!, postName: "VACUUM", postDate: "today at 00:06", postText: "Для любого человека понятие «дом» значит гораздо больше, чем толкование в массивных словарях или современной Википедии. Это не только жилище, где можно поесть, поспать, принять душ и посмотреть телевизор. Но все же каждый вкладывает в это слово особый смысл. Для любого человека понятие «дом» значит гораздо больше, чем толкование в массивных словарях или современной Википедии. Это не только жилище, где можно поесть, поспать, принять душ и посмотреть телевизор. Но все же каждый вкладывает в это слово особый смысл.", postImage: UIImage(named: "House")!),
         Post(postAvatar: UIImage(named: "Dwayne Johnson")!, postName: "Dwayne Johnson", postDate: "yesterday at 23:06", postText: " I bought a new car today, check it  😂", postImage: UIImage(named: "auto1")!),
@@ -20,6 +22,12 @@ class NewsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetcher.getFeed { (feedResponse) in
+            guard let feedResponse = feedResponse else { return }
+            feedResponse.items.map { (feedItem) in
+                print(feedItem.date)
+            }
+        }
         
         tableView.estimatedRowHeight = 100
         //tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTableViewCell")
