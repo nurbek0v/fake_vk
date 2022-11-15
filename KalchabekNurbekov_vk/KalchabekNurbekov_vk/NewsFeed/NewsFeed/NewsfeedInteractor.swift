@@ -22,8 +22,9 @@ class NewsfeedInteractor: NewsfeedBusinessLogic {
     
     var presenter: NewsfeedPresentationLogic?
     var service: NewsfeedService?
-    //var name: String = ""
-    private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
+    //private var reveledPostIds = [Int]()
+    //private var feedResponse: FeedResponse?
+   // private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
     
     // MARK: Do something
     
@@ -32,16 +33,25 @@ class NewsfeedInteractor: NewsfeedBusinessLogic {
         if service == nil {
             service = NewsfeedService()
         }
+
         switch request {
-            
-            
         case .getNewsfeed:
-            fetcher.getFeed { [weak self] (feedResponse) in
-                
-                guard let feedResponse = feedResponse else { return }
-                self?.presenter?.presentSomething(response: .presentNewsfeed(feed: feedResponse))
-            }
+            service?.getFeed(completion: { [ weak self ] (revealedPostIds, feed) in
+                self?.presenter?.presentSomething(response: .presentNewsfeed(feed: feed, reveledPostIds: revealedPostIds))
+            })
+        case .getUser:
+            service?.getUser(completion: { [ weak self ] (user) in
+                self?.presenter?.presentSomething(response: .presentUserInfo(user: user))
+            })
+        case .revelPostIds(postId: let postId):
+            service?.revealPostIds(forPostId: postId, completion: { [ weak self ] (revealedPostIds, feed) in
+                self?.presenter?.presentSomething(response: .presentNewsfeed(feed: feed, reveledPostIds: revealedPostIds))
+            })
+        case .getNextBatch: 
+            self.presenter?.presentSomething(response: .presentFooterLoader)
+            service?.getNextBatch(completion: { [ weak self ] (revealedPostIds, feed) in
+                self?.presenter?.presentSomething(response: .presentNewsfeed(feed: feed, reveledPostIds: revealedPostIds))
+            })
         }
-        
     }
 }

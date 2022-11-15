@@ -19,22 +19,34 @@ enum Newsfeed {
         struct Request {
             enum RequestType {
                 case getNewsfeed
+                case getUser
+                case revelPostIds(postId: Int)
+                case getNextBatch
             }
         }
         struct Response {
             enum ResponseType {
-                case presentNewsfeed(feed: FeedResponse)
+                case presentNewsfeed(feed: FeedResponse, reveledPostIds: [Int])
+                case presentUserInfo(user: UserResponse?)
+                case presentFooterLoader
             }
         }
         struct ViewModel {
             enum ViewModelData {
                 case displayNewdfeed(feedViewModel: FeedViewModel)
+                case displayUser(UserViewModel: UserViewModel)
+                case displayFooterLoader
             }
         }
     }
 }
+struct UserViewModel: TitleViewViewModel {
+    var photoUrlString: String?
+}
+
 struct FeedViewModel {
     struct Cell: FeedCellViewModel {
+        var postId: Int
         var iconUrlString: String
         var name: String
         var date: String
@@ -43,7 +55,7 @@ struct FeedViewModel {
         var comments: String?
         var reposts: String?
         var views: String?
-        var photoAttachment: FeedCellPhotoAttachmentViewModel?
+        var photoAttachments: [FeedCellPhotoAttachmentViewModel]
         var sizes: FeedCellSizes
 
     }
@@ -54,4 +66,5 @@ struct FeedViewModel {
         
     }
     let cells: [Cell]
+    let footerTitle: String?
 }

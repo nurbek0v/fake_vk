@@ -17,94 +17,143 @@ protocol NewsfeedDisplayLogic: class {
     func displaySomething(viewModel: Newsfeed.Something.ViewModel.ViewModelData)
 }
 
-class NewsfeedViewController: UITableViewController, NewsfeedDisplayLogic {
-  var interactor: NewsfeedBusinessLogic?
-  var router: (NSObjectProtocol & NewsfeedRoutingLogic )?
-
-    private var feedViewModel = FeedViewModel.init(cells: [])
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController           = self
-    let interactor               = NewsfeedInteractor()
-    let presenter                = NewsfeedPresenter()
-    let router                   = NewsfeedRouter()
-    viewController.interactor    = interactor
-    viewController.router        = router
-    interactor.presenter         = presenter
-    presenter.viewController     = viewController
-    router.viewController        = viewController
-    //router.dataStore             = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
+class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCodeCellDelegate {
+    
+    
+    var interactor: NewsfeedBusinessLogic?
+    var router: (NSObjectProtocol & NewsfeedRoutingLogic )?
+    
+    private var feedViewModel = FeedViewModel.init(cells: [], footerTitle: nil)
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var titleView = TitleView()
+    private lazy var footerView = FooterView()
+    
+    private var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
+    }()
+    // MARK: Setup
+    
+    private func setup(){
+        let viewController           = self
+        let interactor               = NewsfeedInteractor()
+        let presenter                = NewsfeedPresenter()
+        let router                   = NewsfeedRouter()
+        viewController.interactor    = interactor
+        viewController.router        = router
+        interactor.presenter         = presenter
+        presenter.viewController     = viewController
+        router.viewController        = viewController
+        //router.dataStore             = interactor
     }
-  }
-  
-  // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-      setup()
-    //doSomething()
-      tableView.register(UINib(nibName: "NewsfeedCell", bundle: nil), forCellReuseIdentifier: NewsfeedCell.reuseId)
-      tableView.separatorStyle = .none
-      tableView.backgroundColor = .clear
-      view.backgroundColor = UIColor(named: "AccentColor")
-      interactor?.doSomething(request: .getNewsfeed)
-      
-  }
-  
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-//  func doSomething()
-//  {
-//      let request = Newsfeed.Something.Request()
-//      interactor?.doSomething(request: .)
-//  }
-  
+    
+    // MARK: Routing
+    
+    
+    // MARK: View lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+        setupTable()
+        setupTopBars()
+        
+       
+        
+        view.backgroundColor = UIColor(named: "AccentColor")
+        interactor?.doSomething(request: .getNewsfeed)
+        interactor?.doSomething(request: .getUser)
+        
+    }
+    private func setupTable() {
+        let topInset: CGFloat = 8
+        tableView.contentInset.top = topInset
+        
+        tableView.register(UINib(nibName: "NewsfeedCell", bundle: nil), forCellReuseIdentifier: NewsfeedCell.reuseId)
+        tableView.register(NewsfeedCodeCell.self, forCellReuseIdentifier: NewsfeedCodeCell.reuseId)
+        
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        
+        tableView.addSubview(refreshControl)
+        tableView.tableFooterView = footerView
+    }
+    private func setupTopBars() {
+        let topBar = UIView(frame: UIApplication.shared.statusBarFrame)
+        topBar.backgroundColor = UIColor.white
+        topBar.layer.shadowColor = UIColor.black.cgColor
+        topBar.layer.shadowOpacity = 0.3
+        topBar.layer.shadowOffset = CGSize.zero
+        topBar.layer.shadowRadius = 8
+        self.view.addSubview(topBar)
+        
+        self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationController?.navigationBar.shadowImage = UIImage ( )
+        self.navigationItem.titleView = titleView
+    }
+    @objc private func refresh() {
+        interactor?.doSomething(request: .getNewsfeed)
+    }
+    
+    // MARK: Do something
+    
+    
     func displaySomething(viewModel: Newsfeed.Something.ViewModel.ViewModelData) {
-    //nameTextField.text = viewModel.name
+        //nameTextField.text = viewModel.name
         switch viewModel {
         case .displayNewdfeed(feedViewModel: let feedViewModel):
             self.feedViewModel = feedViewModel
+            footerView.setTitle(feedViewModel.footerTitle)
             tableView.reloadData()
+            refreshControl.endRefreshing()
+        case .displayUser(let userViewModel):
+            titleView.set(userViewModel: userViewModel)
+        case .displayFooterLoader:
+            footerView.showLoader()
         }
-  }
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height / 1.1 {
+            interactor?.doSomething(request: .getNextBatch)
+        }
+    }
+    //MARK: - NewsfeedCodeCellDelegate
     
-
-    //MARK: - Table View Data Source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func revelPost(for cell: NewsfeedCodeCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        
+        interactor?.doSomething(request: .revelPostIds(postId: cellViewModel.postId))
+    }
+    
+}
+//MARK: - UITableViewDelegate , UITableViewDataSource
+extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return feedViewModel.cells.count
     }
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewsfeedCell.reuseId, for: indexPath) as! NewsfeedCell
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //let cell = tableView.dequeueReusableCell(withIdentifier: NewsfeedCell.reuseId, for: indexPath) as! NewsfeedCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsfeedCodeCell.reuseId, for: indexPath) as! NewsfeedCodeCell
         let cellViewModel = feedViewModel.cells[indexPath.row]
         cell.set(viewModel: cellViewModel)
+        cell.delegate = self
         return cell
     }
-    //MARK: - Table View Delegate
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("select.row")
-//        interactor?.doSomething(request: .getFeed)
-//    }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        return cellViewModel.sizes.totalHeight
+    }
+    
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellViewModel = feedViewModel.cells[indexPath.row]
         return cellViewModel.sizes.totalHeight
     }
     
 }
-

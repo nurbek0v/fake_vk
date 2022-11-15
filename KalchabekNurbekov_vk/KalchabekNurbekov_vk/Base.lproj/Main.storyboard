@@ -573,20 +573,48 @@
             </objects>
             <point key="canvasLocation" x="1557.9710144927537" y="-250.44642857142856"/>
         </scene>
-        <!--News-->
-        <scene sceneID="he8-Dl-ps5">
+        <!--Newsfeed View Controller-->
+        <scene sceneID="7h0-Ge-W0y">
             <objects>
-                <viewController id="p9H-eU-18w" customClass="NewsfeedViewController" customModule="KalchabekNurbekov_vk" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="bYN-y5-RdO">
+                <viewController id="5tc-xf-MEu" customClass="NewsfeedViewController" customModule="KalchabekNurbekov_vk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Na-9O-uc6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4P-6a-GiA" customClass="GradientView" customModule="KalchabekNurbekov_vk" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gya-Ft-NvC">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="5tc-xf-MEu" id="8oL-4B-39B"/>
+                                    <outlet property="delegate" destination="5tc-xf-MEu" id="C8t-04-3HW"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yqR-PR-ay7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="News" id="Tym-Q7-C7X"/>
+                        <constraints>
+                            <constraint firstItem="yqR-PR-ay7" firstAttribute="trailing" secondItem="c4P-6a-GiA" secondAttribute="trailing" id="761-95-rag"/>
+                            <constraint firstAttribute="bottom" secondItem="gya-Ft-NvC" secondAttribute="bottom" id="AiD-ZC-PHR"/>
+                            <constraint firstItem="c4P-6a-GiA" firstAttribute="leading" secondItem="yqR-PR-ay7" secondAttribute="leading" id="ILV-o7-TaQ"/>
+                            <constraint firstItem="gya-Ft-NvC" firstAttribute="trailing" secondItem="yqR-PR-ay7" secondAttribute="trailing" id="NEz-kh-56y"/>
+                            <constraint firstItem="gya-Ft-NvC" firstAttribute="leading" secondItem="yqR-PR-ay7" secondAttribute="leading" id="bxC-fB-sD9"/>
+                            <constraint firstItem="c4P-6a-GiA" firstAttribute="top" secondItem="yqR-PR-ay7" secondAttribute="top" id="cqW-rR-3f7"/>
+                            <constraint firstItem="gya-Ft-NvC" firstAttribute="top" secondItem="2Na-9O-uc6" secondAttribute="top" id="m0t-sX-wap"/>
+                            <constraint firstItem="yqR-PR-ay7" firstAttribute="bottom" secondItem="c4P-6a-GiA" secondAttribute="bottom" id="zkc-UK-ugd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vGt-dV-b3j"/>
+                    <connections>
+                        <outlet property="tableView" destination="gya-Ft-NvC" id="Xuh-TQ-REg"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lsg-MX-1Ap" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7gS-Te-6m2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2466.666666666667" y="1307.8125"/>
+            <point key="canvasLocation" x="2467" y="1308"/>
         </scene>
         <!--Group-->
         <scene sceneID="ray-cS-LhX">
@@ -620,7 +648,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="p9H-eU-18w" kind="relationship" relationship="rootViewController" id="uRT-1t-ibU"/>
+                        <segue destination="5tc-xf-MEu" kind="relationship" relationship="rootViewController" id="bt9-p3-eTS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ylg-yc-Dgk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
