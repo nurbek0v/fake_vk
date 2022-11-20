@@ -28,7 +28,7 @@ class InsetableTextField: UITextField {
         leftView?.frame = CGRect(x: 0, y: 0, width: 14, height: 14)
         leftViewMode = .always
     }
-    required init?(coder Decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         fatalError ("init(coder:) has not been implemented" )
     }
    

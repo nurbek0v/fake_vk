@@ -62,7 +62,7 @@ class FriendsGroupViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendXibTableViewCell", for: indexPath) as! FriendXibTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendXibTableViewCell", for: indexPath) as? FriendXibTableViewCell else { fatalError("can not cast cell") }
 
 //        let firstChar = sortedGroups.keys.sorted()[indexPath.section]
 //        let groups = sortedGroups[firstChar]!

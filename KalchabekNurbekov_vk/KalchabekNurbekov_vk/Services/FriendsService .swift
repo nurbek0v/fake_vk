@@ -74,7 +74,7 @@ final class FriendService {
             URLQueryItem(name: "user_id", value: String(id)),
             URLQueryItem(name: "access_token", value: String(token)),
             URLQueryItem(name: "v", value: "5.131"),
-            //URLQueryItem(name: "fields", value: "city"),
+            // URLQueryItem(name: "fields", value: "city"),
             URLQueryItem(name: "fields", value: "photo_100,city")
             
         ]
@@ -104,4 +104,3 @@ final class FriendService {
         }.resume()
     }
 }
-

@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class FriendsPhotoViewController: UICollectionViewController {
     
    public var photoArray = [UIImage]()
@@ -29,7 +28,7 @@ class FriendsPhotoViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendsPhotoCell", for: indexPath) as! FriendsPhotoCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendsPhotoCell", for: indexPath) as? FriendsPhotoCollectionViewCell else {fatalError("can not cast")}
         cell.friendPhoto.image = photoArray[indexPath.item]
 
     
@@ -42,14 +41,13 @@ class FriendsPhotoViewController: UICollectionViewController {
             bigPhoto.bigPhotos = photoArray
             bigPhoto.selectedPhotoIndex = selectPhoto.item
         }
-           
     }
 }
 
 extension FriendsPhotoViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsPerRow:CGFloat = 2
+        let itemsPerRow: CGFloat = 2
         let paddingWidth = 20 * (itemsPerRow + 1)
         let availableWidth = collectionView.frame.width - paddingWidth
         let widthPerItem = availableWidth / itemsPerRow

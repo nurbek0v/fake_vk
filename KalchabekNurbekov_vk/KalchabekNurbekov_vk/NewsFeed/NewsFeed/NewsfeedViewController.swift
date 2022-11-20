@@ -36,7 +36,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
     }()
     // MARK: Setup
     
-    private func setup(){
+    private func setup() {
         let viewController           = self
         let interactor               = NewsfeedInteractor()
         let presenter                = NewsfeedPresenter()
@@ -46,7 +46,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
         interactor.presenter         = presenter
         presenter.viewController     = viewController
         router.viewController        = viewController
-        //router.dataStore             = interactor
+        // router.dataStore             = interactor
     }
     
     // MARK: Routing
@@ -119,7 +119,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
             interactor?.doSomething(request: .getNextBatch)
         }
     }
-    //MARK: - NewsfeedCodeCellDelegate
+    // MARK: - NewsfeedCodeCellDelegate
     
     func revelPost(for cell: NewsfeedCodeCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
@@ -129,7 +129,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
     }
     
 }
-//MARK: - UITableViewDelegate , UITableViewDataSource
+// MARK: - UITableViewDelegate , UITableViewDataSource
 extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -137,8 +137,8 @@ extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: NewsfeedCell.reuseId, for: indexPath) as! NewsfeedCell
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewsfeedCodeCell.reuseId, for: indexPath) as! NewsfeedCodeCell
+        // let cell = tableView.dequeueReusableCell(withIdentifier: NewsfeedCell.reuseId, for: indexPath) as! NewsfeedCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsfeedCodeCell.reuseId, for: indexPath) as? NewsfeedCodeCell else { fatalError("can not cast") }
         let cellViewModel = feedViewModel.cells[indexPath.row]
         cell.set(viewModel: cellViewModel)
         cell.delegate = self

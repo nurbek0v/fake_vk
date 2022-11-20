@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-//struct Friend {
+// struct Friend {
   //  var name: String
   //  var avatar: String?
 //    //var photos: [UIImage] = []
@@ -17,10 +17,10 @@ import UIKit
 //    var isClosed: Bool?
 //    var trackCode: String
 //    var canAccess: Bool?
-//}
-//struct User {
+// }
+// struct User {
 //    let image: UIImage?
 //    let name: String
 //    let photos: [UIImage?]?
 //    //let friends: [PFriends]
-//}
+// }

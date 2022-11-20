@@ -42,7 +42,7 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
             viewController?.displaySomething(viewModel: .displayNewdfeed(feedViewModel: feedViewModel))
         case .presentUserInfo(user: let user):
             let userViewModel = UserViewModel.init(photoUrlString: user?.photo100)
-            viewController?.displaySomething(viewModel: .displayUser(UserViewModel: userViewModel))
+            viewController?.displaySomething(viewModel: .displayUser(userViewModel: userViewModel))
         case .presentFooterLoader:
             viewController?.displaySomething(viewModel: .displayFooterLoader)
         }

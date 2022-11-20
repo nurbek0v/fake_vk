@@ -34,7 +34,7 @@ enum Newsfeed {
         struct ViewModel {
             enum ViewModelData {
                 case displayNewdfeed(feedViewModel: FeedViewModel)
-                case displayUser(UserViewModel: UserViewModel)
+                case displayUser(userViewModel: UserViewModel)
                 case displayFooterLoader
             }
         }

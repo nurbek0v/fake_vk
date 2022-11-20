@@ -8,20 +8,17 @@
 import UIKit
 import WebKit
 
-
 class AuthVKViewController: UIViewController {
     var session = Session.instance
 
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        WebView.navigationDelegate = self
+        webView.navigationDelegate = self
         loadAuthVK()
       
-
     }
-    @IBOutlet weak var WebView: WKWebView!
-    
+    @IBOutlet weak var webView: WKWebView!
     
     func loadAuthVK() {
         // конструктор для URL
@@ -42,13 +39,12 @@ class AuthVKViewController: UIViewController {
         print(url)
         let request = URLRequest(url: url)
         
-        WebView.load(request)
+        webView.load(request)
     }
 }
 
 extension AuthVKViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        
         // проверка на полученый адрес и получение данных из урла
         guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment  else {
             decisionHandler(.allow)

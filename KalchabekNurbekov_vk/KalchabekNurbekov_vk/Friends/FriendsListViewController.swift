@@ -63,7 +63,7 @@ class FriendsListViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendXibTableViewCell", for: indexPath) as! FriendXibTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendXibTableViewCell", for: indexPath) as? FriendXibTableViewCell else { fatalError("can not cast") }
         cell.friendNameLabel.text = response[indexPath.row].firstName
         cell.friendAgeLabel.text = String(response[indexPath.row].id)
         guard let imgUrl = URL(string: (response[indexPath.row].avatar!)) else { return cell }

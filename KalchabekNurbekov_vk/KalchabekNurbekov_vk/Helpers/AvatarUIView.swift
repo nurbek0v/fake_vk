@@ -7,14 +7,14 @@
 
 import UIKit
 
-class avatarUIView: UIView {
+class AvatarUIView: UIView {
     @IBOutlet var avatarImageView: UIImageView!
     @IBOutlet var shadowView: UIView!
     var shadowColor = UIColor.black
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         shadowView.layer.shadowColor = shadowColor.cgColor
         shadowView.layer.shadowOffset = .zero
         shadowView.layer.shadowRadius = 10
@@ -24,6 +24,6 @@ class avatarUIView: UIView {
         super.layoutSubviews()
         shadowView.layer.cornerRadius = bounds.height/2
         avatarImageView.layer.cornerRadius = bounds.height/2
-        
+
     }
 }

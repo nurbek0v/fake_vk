@@ -25,7 +25,7 @@ class RowLayout: UICollectionViewLayout {
     
     fileprivate var contentWidth: CGFloat = 0
     
-    //constant
+    // constant
     fileprivate var contentHeight: CGFloat {
         
         guard let collectionView = collectionView else { return 0 }
@@ -51,7 +51,7 @@ class RowLayout: UICollectionViewLayout {
         
         let superviewWidth = collectionView.frame.width
         guard var rowHeight = RowLayout.rowHeightCounter(superViewWidth: superviewWidth, photosArray: photos) else { return }
-        
+        // swiftlint:disable shorthand_operator
         rowHeight = rowHeight / CGFloat(RowLayout.numbersOfRows)
         
         let photosRatio = photos.map { $0.height / $0.width }
@@ -77,6 +77,7 @@ class RowLayout: UICollectionViewLayout {
             cache.append(attribute)
             
             contentWidth = max(contentWidth, frame.maxX)
+         
             xOffset[row] = xOffset[row] + width
             row = row < (RowLayout.numbersOfRows - 1) ? (row + 1) : 0
         }

@@ -1,0 +1,15 @@
+disabled rules:
+- trailing_whitespace
+
+excluded:
+- Pods
+- Carthage
+
+line_length:
+warning: 150
+
+function _parameter_count:
+warning: 10
+error: 15
+
+warning_threshold: 15

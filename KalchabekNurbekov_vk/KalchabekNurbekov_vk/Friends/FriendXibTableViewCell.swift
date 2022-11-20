@@ -12,10 +12,9 @@ class FriendXibTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         friendImageView.layer.cornerRadius = friendImageView.bounds.width/2
-        
-        
+
     }
-   
+
     @IBOutlet var friendImageView: UIImageView!
     @IBOutlet var friendNameLabel: UILabel!
     @IBOutlet var friendAgeLabel: UILabel!

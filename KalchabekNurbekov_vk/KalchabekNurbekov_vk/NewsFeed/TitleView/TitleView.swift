@@ -41,7 +41,7 @@ class TitleView: UIView {
                             bottom: nil,
                             trailing: trailingAnchor,
                             padding: UIEdgeInsets(top: 4, left: 777, bottom: 777, right: 4))
-        myAvatarView.heightAnchor.constraint (equalTo: myTextField.heightAnchor, multiplier: 1).isActive = true
+        myAvatarView.heightAnchor.constraint(equalTo: myTextField.heightAnchor, multiplier: 1).isActive = true
         myAvatarView.widthAnchor.constraint(equalTo: myTextField.heightAnchor, multiplier: 1).isActive = true
         
         // myTextField constraints
@@ -55,7 +55,7 @@ class TitleView: UIView {
         return UIView.layoutFittingExpandedSize
     }
     override func layoutSubviews() {
-        super.layoutSubviews ( )
+        super.layoutSubviews()
         myAvatarView.layer.masksToBounds = true
         myAvatarView.layer.cornerRadius = myAvatarView.frame.width / 2
     }
@@ -64,4 +64,3 @@ class TitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
